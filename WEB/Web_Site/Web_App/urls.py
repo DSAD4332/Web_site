@@ -21,8 +21,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from . import views
 
 urlpatterns = [
-    re_path(r'^$', views.home, name='home'),
-    re_path(r'^home$', views.home, name='home'),
+    path("", views.home, name="home"),
     path("projects/", views.projects, name="projects"), 
     path("contact/", views.contact, name="contact"), 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
