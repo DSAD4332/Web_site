@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import CustomUser, Product, Company, Order, OrderItem
+from .models import CustomUser, Product, Company, Order, OrderItem, Category, Subcategory, Product
 
 class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -14,7 +14,7 @@ class ProductSerializer(serializers.ModelSerializer):
 class CompanySerializer(serializers.ModelSerializer):
     class Meta:
         model = Company
-        fields = ['id', 'name', 'description', 'address', 'category', 'email', 'password']
+        fields = ['id', 'name', 'description', 'address', 'email', 'password', 'category']
 
 class OrderItemSerializer(serializers.ModelSerializer):
     class Meta:
@@ -26,4 +26,29 @@ class OrderSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        fields = ['id', 'user', 'order_items', 'total_cost', 'status', 'order_date', 'delivery_info']
+        fields = ['id', 'user', 'order_items', 'total_cost', 'status', 'order_date', 'delivery_info', 'delivery_type', 'delivery_charge']
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ['id', 'name', 'description']
+
+class SubcategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Subcategory
+        fields = ['id', 'category', 'name', 'description']
+
+class ProductSerializer(serializers.ModelSerializer):
+    subcategory_name = serializers.CharField(write_only=True, required=False)
+    subcategory_details = SubcategorySerializer(source='subcategory', read_only=True)
+
+    class Meta:
+        model = Product
+        fields = ['id', 'name', 'description', 'price', 'subcategory', 'subcategory_details']
+
+    def create(self, validated_data):
+        subcategory_name = validated_data.pop('subcategory_name', None)
+        if subcategory_name:
+            subcategory, created = Subcategory.objects.get_or_create(name=subcategory_name)
+            validated_data['subcategory'] = subcategory
+        return super().create(validated_data)
