@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = 'Web_App.CustomUser'
 
 # Application definition
 
@@ -39,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Web_App',
     'imagekit',
+    'myapp', 
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -80,8 +83,12 @@ WSGI_APPLICATION = 'Web_Site.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'Trading_platform',
+        'USER': 'postgres',
+        'PASSWORD': '7946',
+        'HOST': 'localhost',
+        'PORT': '5432',  
     }
 }
 
