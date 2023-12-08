@@ -127,10 +127,6 @@ STATIC_ROOT = r'C:\\Users\\Home\\OneDrive\\Desktop\\Мое\\VSC 1\\.vscode\\WEB\
 
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = r'C:\\Users\\Home\\OneDrive\\Desktop\\Мое\\VSC 1\\.vscode\\WEB\\Web_Site\\Web_App\\media\\Web_App'  
-# Change first part of this path on Your path to the /WEB folder,
-
-MEDIA_URL = '/media/'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
