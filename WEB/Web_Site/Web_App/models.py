@@ -41,16 +41,16 @@ class Company(models.Model):
     CATEGORY_CHOICES = [
         ('all', 'Все'),
         ('food and drinks', 'Еда и Напитки'),
-        ('beauty and health', 'Красота и Здоровье')
-        ('house and garden', 'Дом и Сад')
+        ('beauty and health', 'Красота и Здоровье'),
+        ('house and garden', 'Дом и Сад'),
         ('sports', 'Спорт'),
         ('clothing and accessories', 'Одежда и Аксессуары'),
         ('electronics and engineering', 'Электроника и Техника'),
-        ('books, toys and hobbies', 'Книги, Игрушки и Хобби')
-        ('pets', 'Питомцы')
-        ('cars and transport', 'Авто и Транспорт')
-        ('floristry and gifts', 'Флористика и Подарки')
-        ('office supplies', 'Канцелярские Товары')
+        ('books, toys and hobbies', 'Книги, Игрушки и Хобби'),
+        ('pets', 'Питомцы'),
+        ('cars and transport', 'Авто и Транспорт'),
+        ('floristry and gifts', 'Флористика и Подарки'),
+        ('office supplies', 'Канцелярские Товары'),
     ]
     name = models.CharField(max_length=100)
     description = models.TextField()
@@ -58,7 +58,7 @@ class Company(models.Model):
     category = models.ForeignKey(Category, related_name='companies', on_delete=models.CASCADE)
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=50)
-    category = models.CharField(max_length=15, choices=CATEGORY_CHOICES, default='all')
+    category = models.CharField(max_length=30, choices=CATEGORY_CHOICES, default='all')
 
 class Order(models.Model):
     user = models.ForeignKey(CustomUser, related_name='orders', on_delete=models.CASCADE)
