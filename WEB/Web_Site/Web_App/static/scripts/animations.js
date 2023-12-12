@@ -1,8 +1,36 @@
 function expandSearch() {
-    const searchContainer = document.querySelector('.search-container');
-    const searchInput = document.querySelector('#search-input');
-  
-    searchInput.style.width = '500px'; // Установите желаемую конечную ширину
-    searchInput.focus(); // Установите фокус на поле ввода
-  }
-  
+  const searchInput = document.querySelector('#search-input');
+
+  searchInput.style.width = '500px';
+  searchInput.style.opacity = '1';
+  searchInput.focus();
+  setTimeout(function () {
+    const requests = [
+      "А как какать?|",
+      "Мишк фреде верс спудимен|",
+      "бравл старс читы|",
+      "непон пон|",
+    ];
+    
+    let randomText = requests[Math.floor(Math.random() * requests.length)];
+
+    searchInput.setAttribute('placeholder', randomText);
+
+    let i = 0;
+    let placeholder = "";
+
+    function type() {
+      const speed = 100;
+    
+      (i < randomText.length)
+        placeholder += randomText.charAt(i);
+        searchInput.setAttribute('placeholder', placeholder);
+        i++;
+    
+        setTimeout(type, speed);
+    }
+    
+    type();
+
+  }, 1000);
+}

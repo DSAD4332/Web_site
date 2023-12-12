@@ -16,8 +16,9 @@
     import { gsap } from "https://cdn.skypack.dev/gsap@3.9.0";
   </script>
 </head>
-<body>
-<div>
+
+<body class="hat">
+
 <div class="cursor">
   <div class="cursor--small"></div>
   <div class="cursor--large"></div>
@@ -26,18 +27,12 @@
   </div>
 </div>
 
-<navbar>
-  <img src="{% static 'images/proto-logo.jpg' %}" alt="Proto Logo" width="50" height="50">
-</navbar>
-<div class="search-container">
-  <input type="text" id="search-input" placeholder="Поиск">
-  <button id="search-icon" onclick="expandSearch()">&#128269;</button>
+<img src="{% static 'images/proto-logo.jpg' %}" alt="Proto Logo">
+<div class="search-container" align="right">
+  <input type="text" id="search-input">
+  <button onclick="expandSearch()">&#128269;</button>
 </div>
 <hr>
 
-{% block content %}
-  <!-- Your page content goes here -->
-{% endblock %}
-</div>
 </body>
 </html>

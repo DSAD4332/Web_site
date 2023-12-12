@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from django.urls import path
+from django.urls import path, re_path, include
 from rest_framework.routers import DefaultRouter
 from . import views
 from .views import CategoryViewSet, SubcategoryViewSet, ProductViewSet, CompanyViewSet, OrderViewSet, CustomUserViewSet
@@ -17,8 +17,11 @@ router.register(r'users', CustomUserViewSet)
 
 # Объединение URL-конфигураций
 urlpatterns = [
-    path("", views.home, name="home"),
+    re_path(r'^$', views.home, name='home'),
+    re_path(r'^home$', views.home, name='home'),
     path("projects/", views.projects, name="projects"), 
     path("contact/", views.contact, name="contact"), 
-]
+    path('', include(router.urls)),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
 urlpatterns += staticfiles_urlpatterns()

@@ -1,25 +1,6 @@
-
-navbar { 
-    width: 100%; 
-    margin:0px 0; 
-  } 
-  
-navbar ul li{ 
-    width: 33%; 
-    float: left; 
-  } 
-
-navbar ul li a{ 
-    text-decoration: none; 
-    color: rgb(0, 0, 0); 
-    text-align: center; 
-    padding: 20px 0; 
-    display: block; 
-    width: 100%; 
-    background-color: rgb(49, 143, 30); 
-  } 
-
-navbar ul li a:hover { 
-    background-color: rgb(11, 221, 29); 
-  } 
-  
+img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    display: inline-block;
+}
