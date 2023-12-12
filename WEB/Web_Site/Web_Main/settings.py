@@ -38,9 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Web_App',
-    'imagekit',
     'rest_framework',
+    'rest_framework.authtoken',
+    'Web_App.apps.WebAppConfig'
 ]
 
 MIDDLEWARE = [
@@ -85,7 +85,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'Trading_platform',
         'USER': 'postgres',
-        'PASSWORD': '123',
+        'PASSWORD': '7946',
         'HOST': 'localhost',
         'PORT': '5432',  
     }
@@ -131,3 +131,9 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+}

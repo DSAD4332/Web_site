@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import CustomUser, Product, Company, Order, OrderItem, Category, Subcategory, Product
+from .models import CustomUser, Product, Company, Order, OrderItem, Category, Subcategory, Product, Review
 
 class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -52,3 +52,10 @@ class ProductSerializer(serializers.ModelSerializer):
             subcategory, created = Subcategory.objects.get_or_create(name=subcategory_name)
             validated_data['subcategory'] = subcategory
         return super().create(validated_data)
+
+class ReviewSerializer(serializers.ModelSerializer):
+    author_username = serializers.ReadOnlyField(source='author.username')
+
+    class Meta:
+        model = Review
+        fields = ['id', 'product', 'company', 'author', 'author_username', 'rating', 'comment']
