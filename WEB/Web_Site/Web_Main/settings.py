@@ -38,8 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Web_App',
-    'imagekit',
     'rest_framework',
     'rest_framework.authtoken',
     'Web_App.apps.WebAppConfig'
@@ -87,7 +85,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'Trading_platform',
         'USER': 'postgres',
-        'PASSWORD': '7946',
+        'PASSWORD': '123',
         'HOST': 'localhost',
         'PORT': '5432',  
     }

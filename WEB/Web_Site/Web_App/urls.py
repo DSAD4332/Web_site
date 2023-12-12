@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from django.urls import path
+from django.urls import path, include, re_path
 from rest_framework.routers import DefaultRouter
 from . import views
 from .views import CategoryViewSet, SubcategoryViewSet, ProductViewSet, CompanyViewSet, OrderViewSet, CustomUserViewSet, ReviewViewSet
@@ -22,8 +22,7 @@ urlpatterns = [
     re_path(r'^home$', views.home, name='home'),
     path("projects/", views.projects, name="projects"), 
     path("contact/", views.contact, name="contact"), 
-<<<<<<<<< Temporary merge branch 1
-    path('', include(router.urls)),  # Добавление маршрутизатора REST framework
+    path('', include(router.urls)), 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += staticfiles_urlpatterns()

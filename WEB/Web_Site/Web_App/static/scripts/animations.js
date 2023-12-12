@@ -6,10 +6,10 @@ function expandSearch() {
   searchInput.focus();
   setTimeout(function () {
     const requests = [
-      "А как какать?|",
-      "Мишк фреде верс спудимен|",
-      "бравл старс читы|",
-      "непон пон|",
+      "А как какать?",
+      "Мишк фреде верс спудимен",
+      "бравл старс читы",
+      "непон пон",
     ];
     
     let randomText = requests[Math.floor(Math.random() * requests.length)];

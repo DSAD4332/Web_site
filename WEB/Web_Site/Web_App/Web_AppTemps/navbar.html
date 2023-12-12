@@ -1,38 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home</title>
-  {% load static %} 
-  <link rel="stylesheet" media="all" type="text/css" href="{% static 'styles/navbar/style.css' %}"/>
-  <link rel="stylesheet" media="all" type="text/css" href="{% static 'styles/navbar/search.css' %}"/>
-  <link rel="stylesheet" media="all" type="text/css" href="{% static 'styles/navbar/cursor.css' %}"/>
-  <script src="{% static 'scripts/animations.js' %}"></script>
-  <script src="{% static 'scripts/cursor.js' %}"></script>
-  <script defer src="https://cdn.jsdelivr.net/gh/peterhry/CircleType@2.3.1/dist/circletype.min.js"></script>
-  <script src="https://unpkg.com/gsap@3.9.0/dist/gsap.min.js"></script>
-  <script type="module">
-    import { gsap } from "https://cdn.skypack.dev/gsap@3.9.0";
-  </script>
-</head>
-
-<body class="hat">
-
-<div class="cursor">
-  <div class="cursor--small"></div>
-  <div class="cursor--large"></div>
-  <div class="cursor--text">
-    <div class="text">GO HERE! GO HERE! GO HERE! GO HERE!</div>
-  </div>
-</div>
-
-<img src="{% static 'images/proto-logo.jpg' %}" alt="Proto Logo">
-<div class="search-container" align="right">
-  <input type="text" id="search-input">
-  <button onclick="expandSearch()">&#128269;</button>
-</div>
-<hr>
-
-</body>
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Home</title> 
+  {% load static %}  
+  <link rel="stylesheet" media="all" type="text/css" href="{% static 'styles/navbar/style.css' %}"/> 
+  <link rel="stylesheet" media="all" type="text/css" href="{% static 'styles/navbar/search.css' %}"/> 
+  <link rel="stylesheet" media="all" type="text/css" href="{% static 'styles/navbar/cursor.css' %}"/> 
+  <script src="{% static 'scripts/animations.js' %}"></script> 
+  <script src="{% static 'scripts/cursor.js' %}"></script> 
+  <script defer src="https://cdn.jsdelivr.net/gh/peterhry/CircleType@2.3.1/dist/circletype.min.js"></script> 
+  <script src="https://unpkg.com/gsap@3.9.0/dist/gsap.min.js"></script> 
+  <script type="module"> 
+    import { gsap } from "https://cdn.skypack.dev/gsap@3.9.0"; 
+  </script> 
+</head> 
+ 
+<body class="hat"> 
+ 
+<div class="cursor"> 
+  <div class="cursor--small"></div> 
+  <div class="cursor--large"></div> 
+  <div class="cursor--text"> 
+    <div class="text">GO HERE! GO HERE! GO HERE! GO HERE!</div> 
+  </div> 
+</div> 
+ 
+<img src="{% static 'images/proto-logo.jpg' %}" alt="Proto Logo"> 
+<div class="search-container" align="right"> 
+  <input type="text" id="search-input"> 
+  <button onclick="expandSearch()">&#128269;</button> 
+</div> 
+<hr> 
+ 
+</body> 
 </html>
