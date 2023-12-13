@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import CustomUser, Product, Company, Order, OrderItem, Category, Subcategory, Product, Review
+from .models import CustomUser, Product, Company, Order, OrderItem, Category, Subcategory, Product, Review, CartItem, Cart
 
 class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -59,3 +59,18 @@ class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
         fields = ['id', 'product', 'company', 'author', 'author_username', 'rating', 'comment']
+        
+class CartItemSerializer(serializers.ModelSerializer):
+    product_name = serializers.ReadOnlyField(source='product.name')
+    product_price = serializers.ReadOnlyField(source='product.price')
+
+    class Meta:
+        model = CartItem
+        fields = ['id', 'product', 'product_name', 'product_price', 'quantity']
+        
+class CartSerializer(serializers.ModelSerializer):
+    items = CartItemSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Cart
+        fields = ['id', 'items']
