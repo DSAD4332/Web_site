@@ -29,10 +29,10 @@ body, img, area, a, button, p, input, center, section {
     font-weight: bold;
   }
   .cursor--small {
-    --cursor-size: 20px;
+    --cursor-size: 15px;
     background: #fff;
   }
   .cursor--large {
-    --cursor-size: 60px;
+    --cursor-size: 50px;
     border: 2px solid #fff;
   }
