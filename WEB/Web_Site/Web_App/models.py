@@ -94,3 +94,11 @@ class Review(models.Model):
 
     def __str__(self):
         return f"Review by {self.author.username} on {self.product or self.company}"
+    
+class Cart(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+
+class CartItem(models.Model):
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)

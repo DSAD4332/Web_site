@@ -4,7 +4,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import path, include, re_path
 from rest_framework.routers import DefaultRouter
 from . import views
-from .views import CategoryViewSet, SubcategoryViewSet, ProductViewSet, CompanyViewSet, OrderViewSet, CustomUserViewSet, ReviewViewSet
+from .views import CategoryViewSet, SubcategoryViewSet, ProductViewSet, CompanyViewSet, OrderViewSet, CustomUserViewSet, ReviewViewSet, CartViewSet
 
 # Создание маршрутизатора и регистрация наших ViewSets
 router = DefaultRouter()
@@ -15,6 +15,7 @@ router.register(r'companies', CompanyViewSet)
 router.register(r'orders', OrderViewSet)
 router.register(r'users', CustomUserViewSet)
 router.register(r'reviews', ReviewViewSet)
+router.register(r'carts', CartViewSet)
 
 # Объединение URL-конфигураций
 urlpatterns = [

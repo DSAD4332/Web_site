@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from rest_framework import viewsets, permissions, status
 from rest_framework.response import Response
-from .models import CustomUser, Product, Order, Company, OrderItem, Category, Subcategory, Product, Review
-from .serializers import CustomUserSerializer, ProductSerializer, OrderSerializer, CompanySerializer, OrderItemSerializer, CategorySerializer, SubcategorySerializer, ProductSerializer, ReviewSerializer
+from rest_framework.decorators import action
+from .models import CustomUser, Product, Order, Company, OrderItem, Category, Subcategory, Product, Review, Cart
+from .serializers import CustomUserSerializer, ProductSerializer, OrderSerializer, CompanySerializer, OrderItemSerializer, CategorySerializer, SubcategorySerializer, ProductSerializer, ReviewSerializer, CartSerializer
+from .permissions import IsAdminUser, IsCustomerUser, IsCourierUser, IsCompanyUser
 
 
-# Create your views here.
 def home(request): 
     return render(request, "home.html")
   
@@ -24,6 +25,7 @@ class IsOwnerOrAdmin(permissions.BasePermission):
 class CustomUserViewSet(viewsets.ModelViewSet):
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserSerializer
+    permission_classes = [IsAdminUser]
 
     def list(self, request, *args, **kwargs):
         # Кастомная логика для метода GET списка пользователей
@@ -31,7 +33,6 @@ class CustomUserViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
 
-    # Пример переопределения метода create
     def create(self, request, *args, **kwargs):
         # Кастомная логика для метода POST (создание пользователя)
         serializer = self.get_serializer(data=request.data)
@@ -48,8 +49,9 @@ class CustomUserViewSet(viewsets.ModelViewSet):
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    permission_classes = [IsAdminUser | IsCustomerUser]
+    
 
-    # Пример переопределения метода retrieve
     def retrieve(self, request, *args, **kwargs):
         # Кастомная логика для метода GET одного продукта
         instance = self.get_object()
@@ -70,9 +72,8 @@ class ProductViewSet(viewsets.ModelViewSet):
 class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
-    permission_classes = [IsOwnerOrAdmin]
+    permission_classes = [IsAdminUser | IsCourierUser]
 
-    # Пример переопределения метода update
     def update(self, request, *args, **kwargs):
         # Кастомная логика для метода PUT (обновление заказа)
         partial = kwargs.pop('partial', False)
@@ -95,6 +96,13 @@ class CompanyViewSet(viewsets.ModelViewSet):
     queryset = Company.objects.all()
     serializer_class = CompanySerializer
 
+    def get_permissions(self):
+        if self.action in ['list', 'retrieve']:
+            permission_classes = [IsAdminUser | IsCompanyUser]
+        else:
+            permission_classes = [IsAdminUser]
+        return [permission() for permission in permission_classes]
+
     def get_queryset(self):
         # Логика выбора категорий
         category = self.request.query_params.get('category', 'all')
@@ -102,14 +110,12 @@ class CompanyViewSet(viewsets.ModelViewSet):
             return Company.objects.all()
         return Company.objects.filter(category=category)
 
-    # Пример переопределения метода list
     def list(self, request, *args, **kwargs):
         # Кастомная логика для метода GET списка компаний
         queryset = self.get_queryset()
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
 
-    # Пример переопределения метода destroy
     def destroy(self, request, *args, **kwargs):
         # Кастомная логика для метода DELETE (удаление компании)
         instance = self.get_object()
@@ -121,7 +127,6 @@ class OrderItemViewSet(viewsets.ModelViewSet):
     serializer_class = OrderItemSerializer
 
     
-    # Пример переопределения метода create
     def create(self, request, *args, **kwargs):
         # Кастомная логика для метода POST (создание пункта заказа)
         serializer = self.get_serializer(data=request.data)
@@ -129,7 +134,6 @@ class OrderItemViewSet(viewsets.ModelViewSet):
         self.perform_create(serializer)
         return Response(serializer.data)
 
-    # Пример переопределения метода update
     def update(self, request, *args, **kwargs):
         # Кастомная логика для метода PUT (обновление пункта заказа)
         partial = kwargs.pop('partial', False)
@@ -159,3 +163,31 @@ class SubcategoryViewSet(viewsets.ModelViewSet):
 class ReviewViewSet(viewsets.ModelViewSet):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
+    
+class CartViewSet(viewsets.ModelViewSet):
+    queryset = Cart.objects.all()
+    serializer_class = CartSerializer
+    permission_classes = [IsCustomerUser]  
+
+    @action(detail=True, methods=['post'])
+    def add_item(self, request, pk=None):
+        cart = self.get_object()
+        product_id = request.data.get('product_id')
+        quantity = request.data.get('quantity', 1)
+        # Добавление товара в корзину...
+        return Response(status=status.HTTP_200_OK)
+
+    @action(detail=True, methods=['post'])
+    def remove_item(self, request, pk=None):
+        cart = self.get_object()
+        product_id = request.data.get('product_id')
+        # Удаление товара из корзины...
+        return Response(status=status.HTTP_200_OK)
+
+    @action(detail=True, methods=['post'])
+    def update_quantity(self, request, pk=None):
+        cart = self.get_object()
+        product_id = request.data.get('product_id')
+        quantity = request.data.get('quantity', 1)
+        # Изменение количества товара...
+        return Response(status=status.HTTP_200_OK)
