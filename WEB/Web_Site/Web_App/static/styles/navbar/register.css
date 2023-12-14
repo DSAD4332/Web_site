@@ -4,8 +4,9 @@ main {
     margin: 50px 450px ;
 }
 
-.wrapper {
-    position: relative;
+.login-wrapper,
+.signup-wrapper {
+    position: fixed;
     width: 400px;
     height: 440px;
     background: transparent;
@@ -15,6 +16,15 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1;
+    -webkit-transform: translateY(-200%);
+    -ms-transform: translateY(-200%);
+    transform: translateY(-200%);
+    -webkit-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    transition: all 0.4s ease;
 }
 
 .formBox {
@@ -127,4 +137,37 @@ main {
 
 .register p a:hover {
     text-decoration: underline;
+}
+
+.ls-close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 2.4rem;
+    height: 2.4rem;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.ls-close-btn span {
+    color: var(--color-light-1);
+    font-size: 1.3rem;
+}
+
+.active-ls {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    z-index: 99;
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
 }

@@ -16,7 +16,7 @@ body, img, area, a, button, p, input, center, section {
     mix-blend-mode: difference;
     pointer-events: none;
     user-select: none;
-    z-index: 100;
+    z-index: 999999999;
   }
   .cursor--text {
     --cursor-size: fit-content;
