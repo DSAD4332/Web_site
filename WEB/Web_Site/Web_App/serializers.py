@@ -1,3 +1,4 @@
+# serializers
 from rest_framework import serializers
 from .models import CustomUser, Product, Company, Order, OrderItem, Category, Subcategory, Product, Review, CartItem, Cart
 

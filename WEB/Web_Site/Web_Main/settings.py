@@ -58,8 +58,7 @@ ROOT_URLCONF = 'Web_Main.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, r'C:\\Users\\Home\\OneDrive\\Desktop\\Мое\\VSC 1\\.vscode\\WEB\\Web_Site\\Web_SiteTemps'),
-                 os.path.join(BASE_DIR, r'C:\\Users\\Home\\OneDrive\\Desktop\\Мое\\VSC 1\\.vscode\\WEB\\Web_Site\\Web_App\\Web_AppTemps')],  
+        'DIRS': [os.path.join(BASE_DIR, r'C:\\Users\\Home\\OneDrive\\Desktop\\Мое\\VSC 1\\.vscode\\WEB\\Web_Site\\Web_App\\Web_AppTemps')],  
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
