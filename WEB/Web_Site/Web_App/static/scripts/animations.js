@@ -34,3 +34,16 @@ function expandSearch() {
 
   }, 1000);
 }
+
+let header = document.querySelector('.hat');
+let sectionContent = document.querySelector('hr');
+
+window.onscroll = () => {
+  let scrollTop = document.documentElement.scrollTop;
+
+  if (scrollTop > header.offsetHeight) {
+      header.classList.add('active');
+  } else {
+      header.classList.remove('active');
+  }
+}

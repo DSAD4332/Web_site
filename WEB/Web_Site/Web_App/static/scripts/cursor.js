@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", function () {
     const { gsap, CircleType } = window;
   
@@ -144,3 +143,6 @@ document.addEventListener("DOMContentLoaded", function () {
     return s;
   }
   });
+
+
+

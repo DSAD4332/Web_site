@@ -1,10 +1,11 @@
+# urls
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import path, include, re_path
 from rest_framework.routers import DefaultRouter
 from . import views
-from .views import CategoryViewSet, SubcategoryViewSet, ProductViewSet, CompanyViewSet, OrderViewSet, CustomUserViewSet, ReviewViewSet, CartViewSet
+from .views import CategoryViewSet, SubcategoryViewSet, ProductViewSet, CompanyViewSet, OrderViewSet, CustomUserViewSet, ReviewViewSet, CartViewSet, registration_view
 
 # Создание маршрутизатора и регистрация наших ViewSets
 router = DefaultRouter()
@@ -19,13 +20,15 @@ router.register(r'carts', CartViewSet)
 
 # Объединение URL-конфигураций
 urlpatterns = [
-    re_path(r'^$', views.home, name='home'),
-    re_path(r'^home$', views.home, name='home'),
-    path("projects/", views.projects, name="projects"), 
-    path("contact/", views.contact, name="contact"), 
+    re_path(r'^$', views.base, name='base'),
+    re_path(r'^base$', views.base, name='base'),
+    re_path(r'^products/$', views.products, name="products"), 
+    re_path(r'^contact/$', views.contact, name="contact"),
+    re_path(r'^registration/$', views.registration_view, name='registration'),
     path('', include(router.urls)), 
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
 
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += staticfiles_urlpatterns()
 
 if settings.DEBUG:

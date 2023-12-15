@@ -1,20 +1,26 @@
-from django.shortcuts import render
+# views
+from django.shortcuts import render, redirect
+from django.contrib.auth import login
 from rest_framework import viewsets, permissions, status
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from .models import CustomUser, Product, Order, Company, OrderItem, Category, Subcategory, Product, Review, Cart
 from .serializers import CustomUserSerializer, ProductSerializer, OrderSerializer, CompanySerializer, OrderItemSerializer, CategorySerializer, SubcategorySerializer, ProductSerializer, ReviewSerializer, CartSerializer
 from .permissions import IsAdminUser, IsCustomerUser, IsCourierUser, IsCompanyUser
+from .forms import RegistrationForm
 
 
-def home(request): 
-    return render(request, "home.html")
+def base(request): 
+    return render(request, "base.html")
   
-def projects(request): 
-    return render(request, "projects.html") 
+def products(request): 
+    return render(request, "products.html") 
   
 def contact(request): 
     return render(request, "contact.html")
+
+def registration(request): 
+    return render(request, "registration.html")
 
 class IsOwnerOrAdmin(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
@@ -205,3 +211,15 @@ def list_products(request):
 def list_companies(request):
     companies = Company.objects.select_related('category')
     return render(request, '/Users/tair/Documents/Колледж/Python/VS/Trading_platform/Web_site/WEB/Web_Site/Web_App/Web_AppTemps/companies/list.html', {'companies': companies})
+
+def registration_view(request):
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)  # Вход пользователя после успешной регистрации
+            return redirect('base')  # Перенаправление на домашнюю страницу или другую страницу
+    else:
+        form = RegistrationForm()
+
+    return render(request, 'registration.html', {'form': form})
