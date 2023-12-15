@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
-    'Web_App.apps.WebAppConfig'
+    'Web_App.apps.WebAppConfig', 
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -51,9 +52,15 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'Web_Main.urls'
+
+INTERNAL_IPS = [
+    # ...
+    '127.0.0.1',
+]
 
 TEMPLATES = [
     {

@@ -191,3 +191,17 @@ class CartViewSet(viewsets.ModelViewSet):
         quantity = request.data.get('quantity', 1)
         # Изменение количества товара...
         return Response(status=status.HTTP_200_OK)
+    
+def list_orders(request):
+    # Используем select_related для ForeignKey и prefetch_related для ManyToManyField
+    orders = Order.objects.select_related('user').prefetch_related('products')
+    return render(request, '/Users/tair/Documents/Колледж/Python/VS/Trading_platform/Web_site/WEB/Web_Site/Web_App/Web_AppTemps/orders/list.html', {'orders': orders})
+
+def list_products(request):
+    # Используем prefetch_related для доступа к категориям через подкатегории
+    products = Product.objects.prefetch_related('subcategory__category')
+    return render(request, '/Users/tair/Documents/Колледж/Python/VS/Trading_platform/Web_site/WEB/Web_Site/Web_App/Web_AppTemps/products/list.html', {'products': products})
+
+def list_companies(request):
+    companies = Company.objects.select_related('category')
+    return render(request, '/Users/tair/Documents/Колледж/Python/VS/Trading_platform/Web_site/WEB/Web_Site/Web_App/Web_AppTemps/companies/list.html', {'companies': companies})
