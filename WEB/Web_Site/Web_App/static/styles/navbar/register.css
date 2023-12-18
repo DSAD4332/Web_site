@@ -103,9 +103,23 @@ main {
     color: #162938;
     text-decoration: none;
 }
+.remember a::after {
+    content: '';
+    position: absolute;
+    left: 260px;
+    bottom: 105px;
+    width: 26%;
+    height: 3px;
+    background: var(--color-gradient-1);
+    border-radius: 5px;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform .5s;
+}
 
-.remember a:hover {
-    text-decoration: underline;
+.remember a:hover::after {
+    transform-origin: left;
+    transform: scaleX(1);
 }
 
 .buttonreg {
@@ -135,8 +149,23 @@ main {
     font-weight: 600;
 }
 
-.register p a:hover {
-    text-decoration: underline;
+.register p a::after {
+    content: '';
+    position: absolute;
+    left: 250px;
+    bottom: 1px;
+    width: 10%;
+    height: 3px;
+    background: var(--color-gradient-1);
+    border-radius: 5px;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform .5s;
+}
+
+.register p a:hover::after {
+    transform-origin: left;
+    transform: scaleX(1);
 }
 
 .ls-close-btn {
@@ -146,6 +175,7 @@ main {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    background: #012642;
     width: 2.4rem;
     height: 2.4rem;
     -webkit-box-align: center;
@@ -154,7 +184,7 @@ main {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-    cursor: pointer;
+    
 }
 
 .ls-close-btn span {

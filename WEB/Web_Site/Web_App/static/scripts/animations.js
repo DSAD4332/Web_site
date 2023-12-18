@@ -36,14 +36,36 @@ function expandSearch() {
 }
 
 let header = document.querySelector('.hat');
-let sectionContent = document.querySelector('hr');
+let searchblock = document.querySelector('.search-container')
+let searchinput = document.querySelector('#search-input')
 
 window.onscroll = () => {
   let scrollTop = document.documentElement.scrollTop;
 
-  if (scrollTop > header.offsetHeight) {
+  if (scrollTop > 60) {
       header.classList.add('active');
+      searchblock.classList.add('active');
   } else {
       header.classList.remove('active');
+      searchblock.classList.remove('active');
   }
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    const category = document.getElementById('category');
+    const carousel1 = document.getElementById('carousel1');
+    const carousel2 = document.getElementById('carousel2');
+
+    let currentPosition = 1;
+
+    category.addEventListener('wheel', (event) => {
+        event.preventDefault();
+
+        currentPosition += (event.deltaY > 0) ? 1 : -1;
+
+        currentPosition = Math.min(Math.max(currentPosition, 1), 5);
+
+        carousel1.style.setProperty('--position', currentPosition);
+        carousel2.style.setProperty('--position', currentPosition);
+    });
+});

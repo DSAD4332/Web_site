@@ -24,7 +24,6 @@ urlpatterns = [
     re_path(r'^base$', views.base, name='base'),
     re_path(r'^products/$', views.products, name="products"), 
     re_path(r'^contact/$', views.contact, name="contact"),
-    re_path(r'^registration/$', views.registration_view, name='registration'),
     path('', include(router.urls)), 
 ]
 

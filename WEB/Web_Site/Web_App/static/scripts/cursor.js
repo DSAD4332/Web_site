@@ -144,5 +144,17 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   });
 
+//   <div class="cursor"> 
+//   <div class="cursor--small"></div> 
+//   <div class="cursor--large"></div> 
+//   <div class="cursor--text"> 
+//     <div class="text">GO HERE! GO HERE! GO HERE! GO HERE!</div> 
+//   </div> 
+// </div> 
 
-
+  // <script defer src="https://cdn.jsdelivr.net/gh/peterhry/CircleType@2.3.1/dist/circletype.min.js"></script> 
+  // <script src="https://unpkg.com/gsap@3.9.0/dist/gsap.min.js"></script> 
+  // <script type="module"> 
+  //   import { gsap } from "https://cdn.skypack.dev/gsap@3.9.0"; 
+  // </script> 
+  // <link rel="stylesheet" media="all" type="text/css" href="{% static 'styles/navbar/cursor.css' %}"/> 

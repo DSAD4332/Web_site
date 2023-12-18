@@ -1,40 +1,22 @@
 {% include 'navbar.html' %} 
 {% load static %} 
-<link rel="stylesheet" media="all" type="text/css" href="{% static 'styles/style.css' %}" />
-<title>Projects</title> 
-        <section class="project-area"> 
-            <center> 
-            <font size="6"> 
-                  
-<p>PROJECTS</p> 
-  
-            </font> 
-                <div id="project" class="project-item"> 
-                    <h2>PROJECT 1 NAME</h2> 
-                      
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                        Vestibulum dignissim, sapien et efficitur vulputate, 
-                         felis blandit metus, vitae eleifend nisl justo sed nunc. 
-                         Sed ut nunc malesuada, scelerisque mauris sed, hendrerit neque. 
-                         Morbi eget nisl non tellus posuere iaculis. 
-                         Nunc ut tincidunt est, a tempus tortor. Mauris lobortis felis elit, 
-                         quis euismod urna lacinia vitae. Morbi interdum diam in faucibus finibus. 
-                         Sed pellentesque sem a diam rhoncus, eu semper neque efficitur. </p> 
-  
-                </div> 
-                <div id="project" class="project-item"> 
-                    <h2>PROJECT 2 NAME </h2> 
-                      
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                        Vestibulum dignissim, sapien et efficitur vulputate, 
-                         felis blandit metus, vitae eleifend nisl justo sed nunc. 
-                         Sed ut nunc malesuada, scelerisque mauris sed, hendrerit neque. 
-                         Morbi eget nisl non tellus posuere iaculis. 
-                         Nunc ut tincidunt est, a tempus tortor. Mauris lobortis felis elit, 
-                         quis euismod urna lacinia vitae. Morbi interdum diam in faucibus finibus. 
-                         Sed pellentesque sem a diam rhoncus, eu semper neque efficitur. </p> 
-  
-                </div> 
-            </div> 
-            </center> 
-        </section>
+<link rel="stylesheet" media="all" type="text/css" href="{% static 'styles/productsSite.css' %}" />
+<title>Products</title> 
+<main>
+    <form id="addProductForm">
+    <label for="productName">Название товара:</label>
+    <input type="text" id="productName" name="productName" required>
+
+    <label for="productType">Тип товара:</label>
+    <input type="text" id="productType" name="productType" required>
+
+    <label for="productImage">Изображение товара:</label>
+    <input type="file" id="productImage" name="productImage" accept="image/*" required>
+
+    <label for="productDescription">Описание товара:</label>
+    <textarea id="productDescription" name="productDescription" rows="4" required></textarea>
+
+    <button type="button" onclick="addProduct()">Добавить товар</button>
+    </form>
+</main>
+<script src="{% static 'scripts/products.js' %}"></script>
