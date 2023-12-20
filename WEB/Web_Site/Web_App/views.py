@@ -10,17 +10,20 @@ from .permissions import IsAdminUser, IsCustomerUser, IsCourierUser, IsCompanyUs
 from .forms import RegistrationForm
 
 
-def base(request): 
-    return render(request, "base.html")
+def home(request): 
+    return render(request, "Home.html")
   
-def products(request): 
-    return render(request, "products.html") 
+def catalog(request): 
+    return render(request, "Catalog.html") 
   
-def contact(request): 
-    return render(request, "contact.html")
+def contacts(request): 
+    return render(request, "Contacts.html")
 
-def registration(request): 
-    return render(request, "registration.html")
+def about(request): 
+    return render(request, "About.html")
+
+def cooperation(request): 
+    return render(request, "Cooperation.html")
 
 class IsOwnerOrAdmin(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
