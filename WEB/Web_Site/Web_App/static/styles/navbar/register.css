@@ -99,11 +99,11 @@ main {
     margin-right: 3px;
 }
 
-.remember a {
+a {
     color: #162938;
     text-decoration: none;
 }
-.remember a::after {
+a::after {
     content: '';
     position: absolute;
     left: 260px;
@@ -117,7 +117,7 @@ main {
     transition: transform .5s;
 }
 
-.remember a:hover::after {
+a:hover::after {
     transform-origin: left;
     transform: scaleX(1);
 }
@@ -143,30 +143,7 @@ main {
     margin: 25px 0 10px;
 }
 
-.register p a {
-    color: #162938;
-    text-decoration: none;
-    font-weight: 600;
-}
 
-.register p a::after {
-    content: '';
-    position: absolute;
-    left: 250px;
-    bottom: 1px;
-    width: 10%;
-    height: 3px;
-    background: var(--color-gradient-1);
-    border-radius: 5px;
-    transform-origin: right;
-    transform: scaleX(0);
-    transition: transform .5s;
-}
-
-.register p a:hover::after {
-    transform-origin: left;
-    transform: scaleX(1);
-}
 
 .ls-close-btn {
     position: absolute;
