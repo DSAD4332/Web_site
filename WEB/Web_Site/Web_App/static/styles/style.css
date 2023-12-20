@@ -116,6 +116,7 @@ html {
   }
   
   button, html input[type="button"], input[type="reset"] {
+    appearance: button;
     -webkit-appearance: button;
     cursor: pointer;
   }
@@ -143,6 +144,7 @@ html {
   }
   
   input[type="search"] {
+    appearance: none;
     -webkit-appearance: none;
   }
   
@@ -285,6 +287,7 @@ html {
   }
   
   input.w-button {
+    appearance: button;
     -webkit-appearance: button;
   }
   
@@ -490,6 +493,7 @@ html {
   
   button, [type="button"], [type="reset"] {
     cursor: pointer;
+    appearance: button;
     -webkit-appearance: button;
     border: 0;
   }
@@ -1606,6 +1610,7 @@ html {
     cursor: pointer;
     padding: 2vh 1vh;
     display: inline-block;
+    transform: translate3d(0, 0, 0);
     -webkit-transform: translate3d(0, 0, 0);
   }
   
@@ -4618,7 +4623,7 @@ html {
   }
   
   .delivery {
-    width: 100%;
+    width: 90%;
     background-color: #fff;
     border-radius: 16px;
     flex-wrap: wrap;
