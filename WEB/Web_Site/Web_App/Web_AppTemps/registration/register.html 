@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="login-wrapper">
+    <div class="formBox" id="section-content">
+        <h2>Register</h2>
+        <form method="post" action="{% url 'register' %}">
+            {% csrf_token %}
+            <div class="inputreg">
+                <span class="icon"><ion-icon name="person-circle"></ion-icon></span>
+                {{ form.username }}
+                <label for="{{ form.username.id_for_label }}">Username</label>
+            </div>
+            <div class="inputreg">
+                <span class="icon"><ion-icon name="at-circle-sharp"></ion-icon></span>
+                {{ form.email }}
+                <label for="{{ form.email.id_for_label }}">Email</label>
+            </div>
+            <div class="inputreg">
+                <span class="icon"><ion-icon name="home-sharp"></ion-icon></span>
+                {{ form.address }}
+                <label for="{{ form.address.id_for_label }}">Address</label>
+            </div>
+            <div class="inputreg">
+                <span class="icon"><ion-icon name="key-sharp"></ion-icon></span>
+                {{ form.password1 }}
+                <label for="{{ form.password1.id_for_label }}">Password</label>
+            </div>
+            <div class="inputreg">
+                <span class="icon"><ion-icon name="key-sharp"></ion-icon></span>
+                {{ form.password2 }}
+                <label for="{{ form.password2.id_for_label }}">Confirm Password</label>
+            </div>
+            <button class="buttonreg" type="submit">Register</button>
+        </form>
+        <div class="register">
+            <p>Already have an account? <a href="{% url 'login' %}">Login now</a></p>
+        </div>
+    </div>
+    <div id="login-close-btn" class="ls-close-btn">
+        <span><ion-icon name="close-circle-outline"></ion-icon></span>
+    </div>
+</div>
+<div class="popup-shadow"></div>
+{% endblock %}
