@@ -19,11 +19,20 @@ def catalog(request):
 def contacts(request): 
     return render(request, "Contacts.html")
 
-def about(request): 
-    return render(request, "About.html")
+def checkout(request): 
+    return render(request, "Checkout.html")
 
 def cooperation(request): 
     return render(request, "Cooperation.html")
+
+def order_confirmation(request): 
+    return render(request, "Order_confirmation.html")
+
+def categories_stuffedAnimals(request): 
+    return render(request, "Categories_stuffedAnimals.html")
+
+def teddybear(request): 
+    return render(request, "Teddybear.html")
 
 class IsOwnerOrAdmin(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):

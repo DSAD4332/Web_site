@@ -22,11 +22,14 @@ router.register(r'carts', CartViewSet)
 urlpatterns = [
     re_path(r'^$', views.home, name='home'),
     re_path(r'^home$', views.home, name='home'),
-    re_path(r'^catalog/$', views.catalog, name="catalog"), 
-    re_path(r'^about/$', views.about, name="about"),
+    re_path(r'^catalog/$', views.catalog, name="catalog"),
     re_path(r'^cooperation/$', views.cooperation, name="cooperation"),
     re_path(r'^contacts/$', views.contacts, name="contacts"),
-    re_path(r'^register/$', views.registration_view, name='register'),
+  # re_path(r'^register/$', views.registration_view, name='register'),
+    re_path(r'^checkout/$', views.checkout, name="checkout"),
+    re_path(r'^order_confirmation/$', views.order_confirmation, name="order_confirmation"),
+    re_path(r'^categories_stuffedAnimals/$', views.categories_stuffedAnimals, name="categories_stuffedAnimals"),
+    re_path(r'^teddybear/$', views.teddybear, name="teddybear"),
     path('', include(router.urls)), 
 ]
 
