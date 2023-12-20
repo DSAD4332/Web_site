@@ -210,6 +210,20 @@ class CartViewSet(viewsets.ModelViewSet):
         # Изменение количества товара...
         return Response(status=status.HTTP_200_OK)
     
+def list_orders(request):
+    # Используем select_related для ForeignKey и prefetch_related для ManyToManyField
+    orders = Order.objects.select_related('user').prefetch_related('products')
+    return render(request, '/Users/tair/Documents/Колледж/Python/VS/Trading_platform/Web_site/WEB/Web_Site/Web_App/Web_AppTemps/orders/list.html', {'orders': orders})
+
+def list_products(request):
+    # Используем prefetch_related для доступа к категориям через подкатегории
+    products = Product.objects.prefetch_related('subcategory__category')
+    return render(request, '/Users/tair/Documents/Колледж/Python/VS/Trading_platform/Web_site/WEB/Web_Site/Web_App/Web_AppTemps/products/list.html', {'products': products})
+
+def list_companies(request):
+    companies = Company.objects.select_related('category')
+    return render(request, '/Users/tair/Documents/Колледж/Python/VS/Trading_platform/Web_site/WEB/Web_Site/Web_App/Web_AppTemps/companies/list.html', {'companies': companies})
+
 def registration_view(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
@@ -221,3 +235,15 @@ def registration_view(request):
         form = RegistrationForm()
 
     return render(request, 'registration.html', {'form': form})
+
+
+def register(request):
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('home')  # Перенаправление на главную страницу после регистрации
+    else:
+        form = CustomUserCreationForm()
+    return render(request, 'registration/register.html', {'form': form})

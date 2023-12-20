@@ -25,6 +25,7 @@ urlpatterns = [
     re_path(r'^catalog/$', views.catalog, name="catalog"),
     re_path(r'^cooperation/$', views.cooperation, name="cooperation"),
     re_path(r'^contacts/$', views.contacts, name="contacts"),
+  # re_path(r'^register/$', views.registration_view, name='register'),
     re_path(r'^checkout/$', views.checkout, name="checkout"),
     re_path(r'^order_confirmation/$', views.order_confirmation, name="order_confirmation"),
     re_path(r'^categories_stuffedAnimals/$', views.categories_stuffedAnimals, name="categories_stuffedAnimals"),
@@ -34,3 +35,9 @@ urlpatterns = [
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += staticfiles_urlpatterns()
+
+# if settings.DEBUG:
+#     import debug_toolbar
+#     urlpatterns += [
+#         path('__debug__/', include(debug_toolbar.urls)),
+#     ]
