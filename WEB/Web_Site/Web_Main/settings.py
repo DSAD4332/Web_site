@@ -67,7 +67,7 @@ INTERNAL_IPS = [
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, '/Users/tair/Documents/Колледж/Python/VS/Trading_platform/Web_site/WEB/Web_Site/Web_App/Web_AppTemps')],  
+        'DIRS': [os.path.join(BASE_DIR, r'C:\\Users\\Home\\OneDrive\\Desktop\\Мое\\VSC 1\\.vscode\\WEB\\Web_Site\\Web_App\\Web_AppTemps')],  
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -94,7 +94,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'Trading_platform',
         'USER': 'postgres',
-        'PASSWORD': '7946',
+        'PASSWORD': '123',
         'HOST': 'localhost',
         'PORT': '5432',  
     }
@@ -131,7 +131,7 @@ USE_I18N = True
 
 USE_TZ = True
 
-STATIC_ROOT = '/Users/tair/Documents/Колледж/Python/VS/Trading_platform/Web_site/WEB/Web_Site/Web_App/static/Web_App'  
+STATIC_ROOT = r'C:\\Users\\Home\\OneDrive\\Desktop\\Мое\\VSC 1\\.vscode\\WEB\\Web_Site\\Web_App\\static\\Web_App'    
 # Change first part of this path on Your path to the /WEB folder, 
 
 STATIC_URL = '/static/'

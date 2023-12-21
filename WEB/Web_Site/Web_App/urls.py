@@ -30,6 +30,7 @@ urlpatterns = [
     re_path(r'^order_confirmation/$', views.order_confirmation, name="order_confirmation"),
     re_path(r'^categories_stuffedAnimals/$', views.categories_stuffedAnimals, name="categories_stuffedAnimals"),
     re_path(r'^teddybear/$', views.teddybear, name="teddybear"),
+    re_path(r'^products/$', views.products, name="products"),
     path('', include(router.urls)), 
 ]
 

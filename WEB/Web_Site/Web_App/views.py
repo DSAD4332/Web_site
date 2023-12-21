@@ -34,6 +34,10 @@ def categories_stuffedAnimals(request):
 def teddybear(request): 
     return render(request, "Teddybear.html")
 
+def products(request): 
+    return render(request, "Products.html")
+
+
 class IsOwnerOrAdmin(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         # Разрешить удаление, если пользователь является владельцем объекта или администратором

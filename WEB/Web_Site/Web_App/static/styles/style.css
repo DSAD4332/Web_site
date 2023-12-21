@@ -1882,11 +1882,27 @@ html {
     display: inline-block;
     position: relative;
   }
-  
-  .w-nav-link.w--current {
-    color: #0082f3;
-  }
-  
+
+.w-nav-link::after {
+    content: '';
+    text-decoration: none;
+    position: absolute;
+    left: 10px;
+    bottom: 12.5px;
+    width: 80%;
+    height: 3px;
+    background: var(--color-1);
+    border-radius: 5px;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform .5s;
+}
+
+.w-nav-link:hover::after {
+    transform-origin: left;
+    transform: scaleX(1);
+}
+
   .w-nav-menu {
     float: right;
     position: relative;
@@ -2125,6 +2141,52 @@ html {
     transform: scale(1.5);
   }
 
+  #addproduct-btn {
+    position: absolute;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    right: 10px;
+    top: 19px;
+    appearance: none;
+    align-items: center;
+    display: flex;
+    transform: scale(1.7);
+  }
+
+  main {
+    font-family: Arial, sans-serif;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+  form {
+    max-width: 600px;
+    margin: 20px auto;
+  }
+  label {
+    display: block;
+    margin-bottom: 8px;
+  }
+  input, textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+  }
+
+  .addproduct-wrapper {
+    position: relative;
+    background-color: white;
+    border: none;
+    width: 700px;
+    height: 850px;
+    appearance: none;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+
   .w-commerce-commercecartwrapper {
     display: inline-block;
     position: relative;
@@ -2140,6 +2202,7 @@ html {
     border-width: 0;
     border-radius: 0;
     align-items: center;
+    margin: 0px 35px 0px 0px;
     padding: 9px 15px;
     text-decoration: none;
     display: flex;
