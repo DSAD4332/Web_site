@@ -4,7 +4,7 @@ from django.contrib.auth.models import AbstractUser
 
 class CustomUser(AbstractUser):
     email = models.EmailField(unique=True)
-    address = models.CharField(max_length=255)
+    address = models.CharField(max_length=255, db_index=True)
     role = models.CharField(max_length=10, choices=[('customer', 'Customer'), ('admin', 'Admin'), ('company', 'Company')])
 
     class Meta:
@@ -31,13 +31,13 @@ class Product(models.Model):
         ('in_stock', 'В наличии'),
         ('out_of_stock', 'Нет в наличии'),
     ]
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, db_index=True)
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     subcategory = models.ForeignKey(Subcategory, related_name='products', on_delete=models.SET_NULL, null=True)
     image = models.ImageField(upload_to='product_images/')
     stock_quantity = models.IntegerField()
-    discount = models.DecimalField(max_digits=5, decimal_places=2, default=0.00, help_text="Скидка в процентах")
+    discount = models.DecimalField(max_digits=5, decimal_places=2, default=0.00, help_text="(Скидка в процентах)")
     stock_status = models.CharField(max_length=15, choices=STOCK_STATUS_CHOICES, default='in_stock')
 
 
@@ -45,9 +45,9 @@ class Product(models.Model):
         return self.name
 
 class Company(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, db_index=True)
     description = models.TextField()
-    address = models.CharField(max_length=255)
+    address = models.CharField(max_length=255, db_index=True)
     category = models.ForeignKey(Category, related_name='companies', on_delete=models.CASCADE)
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=50)
@@ -66,6 +66,10 @@ class Order(models.Model):
     delivery_type = models.CharField(max_length=10, choices=DELIVERY_CHOICES, default='pickup')
     delivery_charge = models.DecimalField(max_digits=6, decimal_places=2, default=0.00)
     is_deleted = models.BooleanField(default=False)
+    class Meta:
+        indexes = [
+            models.Index(fields=['user', 'order_date']),
+        ]
     
     def soft_delete(self):
         self.is_deleted = True

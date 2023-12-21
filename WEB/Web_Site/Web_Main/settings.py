@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
-    'Web_App.apps.WebAppConfig'
+    'Web_App.apps.WebAppConfig', 
+    # 'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -51,14 +52,22 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'Web_Main.urls'
 
+INTERNAL_IPS = [
+    # ...
+    '127.0.0.1',
+]
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, r'C:\\Users\\Home\\OneDrive\\Desktop\\Мое\\VSC 1\\.vscode\\WEB\\Web_Site\\Web_App\\Web_AppTemps')],  
+        'DIRS': [os.path.join(BASE_DIR, '/Users/tair/Documents/Колледж/Python/VS/Trading_platform/Web_site/WEB/Web_Site/Web_App/Web_AppTemps')],  
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -67,7 +76,8 @@ TEMPLATES = [
                 'django.template.context_processors.static',
                 'django.template.context_processors.media',
                 'django.contrib.auth.context_processors.auth',
-              'django.contrib.messages.context_processors.messages',
+                'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.csrf',
             ],
         },
     },
@@ -84,7 +94,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'Trading_platform',
         'USER': 'postgres',
-        'PASSWORD': '123',
+        'PASSWORD': '7946',
         'HOST': 'localhost',
         'PORT': '5432',  
     }
@@ -121,7 +131,7 @@ USE_I18N = True
 
 USE_TZ = True
 
-STATIC_ROOT = r'C:\\Users\\Home\\OneDrive\\Desktop\\Мое\\VSC 1\\.vscode\\WEB\\Web_Site\\Web_App\\static\\Web_App'  
+STATIC_ROOT = '/Users/tair/Documents/Колледж/Python/VS/Trading_platform/Web_site/WEB/Web_Site/Web_App/static/Web_App'  
 # Change first part of this path on Your path to the /WEB folder, 
 
 STATIC_URL = '/static/'
