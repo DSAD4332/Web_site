@@ -1882,11 +1882,27 @@ html {
     display: inline-block;
     position: relative;
   }
-  
-  .w-nav-link.w--current {
-    color: #0082f3;
-  }
-  
+
+.w-nav-link::after {
+    content: '';
+    text-decoration: none;
+    position: absolute;
+    left: 10px;
+    bottom: 12.5px;
+    width: 80%;
+    height: 3px;
+    background: var(--color-1);
+    border-radius: 5px;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform .5s;
+}
+
+.w-nav-link:hover::after {
+    transform-origin: left;
+    transform: scaleX(1);
+}
+
   .w-nav-menu {
     float: right;
     position: relative;
@@ -2111,7 +2127,66 @@ html {
     --grey-2: #a5a5a5;
     --color-2: #009bfa;
   }
-  
+
+  #signup-btn {
+    position: absolute;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    left: -10px;
+    top: 17px;
+    appearance: none;
+    align-items: center;
+    display: flex;
+    transform: scale(1.5);
+  }
+
+  #addproduct-btn {
+    position: absolute;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    right: 10px;
+    top: 19px;
+    appearance: none;
+    align-items: center;
+    display: flex;
+    transform: scale(1.7);
+  }
+
+  main {
+    font-family: Arial, sans-serif;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+  form {
+    max-width: 600px;
+    margin: 20px auto;
+  }
+  label {
+    display: block;
+    margin-bottom: 8px;
+  }
+  input, textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+  }
+
+  .addproduct-wrapper {
+    position: relative;
+    background-color: white;
+    border: none;
+    width: 700px;
+    height: 850px;
+    appearance: none;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+
   .w-commerce-commercecartwrapper {
     display: inline-block;
     position: relative;
@@ -2127,6 +2202,7 @@ html {
     border-width: 0;
     border-radius: 0;
     align-items: center;
+    margin: 0px 35px 0px 0px;
     padding: 9px 15px;
     text-decoration: none;
     display: flex;
@@ -5945,3 +6021,184 @@ html {
       margin-right: 0;
     }
   }
+  
+  .login-wrapper,
+  .signup-wrapper {
+      position: fixed;
+      width: 400px;
+      height: 440px;
+      top: -1000px;
+      left: 1000px;
+      background: transparent;
+      border: 3px solid var(--color-1);
+      border-radius: 20px;
+      backdrop-filter: blur(20px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      visibility: hidden;
+      z-index: 99;
+      -webkit-transform: translateY(-10%);
+      -ms-transform: translateY(-10%);
+      transform: translateY(-10%);
+      -webkit-transition: all 0.4s ease;
+      -o-transition: all 0.4s ease;
+      transition: all 0.4s ease;
+  }
+  
+  .formBox {
+      width: 100%;
+      padding: 40px;
+  }
+  
+  .formBox h2 {
+      font-size: 2em;
+      margin-top: 25px;
+      color: black;
+      text-align: center;
+  }
+  
+  
+  .inputreg {
+      position:relative;
+      width: 100%;
+      height: 50px;
+      border-bottom: 2px solid black;
+      margin: 30px 0;
+  }
+  
+  .inputreg label {
+      position: absolute;
+      top: 50%;
+      left: 5px;
+      transform: translateY(-50%);
+      font-size: 15px;
+      color: black;
+      font-weight: 500;
+      pointer-events: none;
+      transition: .5s;
+  }
+  
+  .inputreg input:focus~label,
+  .inputreg input:valid~label {
+      top: -5px;
+  
+  }
+  
+  .inputreg input {
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      border: none;
+      outline: none;
+      font-size: 1em;
+      color: #000;
+      font-weight: 600;
+      padding: 0 35px 0 5px;
+  }
+  
+  .inputreg .icon {
+      position: absolute;
+      right: 8px;
+      font-size: 1.2em;
+      color: #000;
+      line-height: 10px;
+  }
+  
+  .remember {
+      font-size: .9em;
+      color: #000;
+      font-weight: 500;
+      margin: -15px 0 15px 0;
+      display: flex;
+      justify-content: space-between;
+  }
+  
+  .remember label input{
+      accent-color: var(--color-4);
+      margin-right: 3px;
+  }
+  
+  a {
+      color: #162938;
+      text-decoration: none;
+  }
+  a::after {
+      content: '';
+      position: absolute;
+      left: 260px;
+      bottom: 105px;
+      width: 26%;
+      height: 3px;
+      background: var();
+      border-radius: 5px;
+      transform-origin: right;
+      transform: scaleX(0);
+      transition: transform .5s;
+  }
+  
+  a:hover::after {
+      transform-origin: left;
+      transform: scaleX(1);
+  }
+  
+  .buttonreg {
+      width: 100%;
+      height: 45px;
+      background: var(--color-1);
+      border: none;
+      outline: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1em;
+      color:aliceblue;
+      font-weight: 500;
+  }
+  
+  .register {
+      font-size: .9em;
+      color: var(--color-1);
+      text-align: center;
+      font-weight: 500;
+      margin: 25px 0 10px;
+  }
+  
+  
+  
+  .ls-close-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      width: 2.4rem;
+      height: 2.4rem;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      cursor: pointer;
+  }
+  
+  .ls-close-btn span {
+      color: var(--color-light-1);
+      font-size: 1.3rem;
+  }
+  
+  .active-ls {
+      opacity: 1;
+      visibility: visible;
+      top: 150px;
+      left: 500px;
+      pointer-events: auto;
+      z-index: 99;
+      -webkit-transform: translateY(0);
+      -ms-transform: translateY(0);
+      transform: translateY(0);
+  }
+  
+  
