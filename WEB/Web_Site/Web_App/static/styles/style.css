@@ -208,7 +208,7 @@ html {
   }
   
   .w-icon-nav-menu:before {
-    content: "о‚";
+    content: "...";
   }
   
   .w-icon-arrow-down:before, .w-icon-dropdown-toggle:before {
@@ -248,7 +248,7 @@ html {
   }
   
   html.w-mod-touch * {
-    background-attachment: scroll !important;
+    background-attachment: scroll;
   }
   
   .w-block {
@@ -1428,7 +1428,7 @@ html {
     display: block;
   }
   
-  .w-dropdown-link.w--current {
+  .w-dropdown-link.current {
     color: #0082f3;
   }
   
@@ -2058,7 +2058,7 @@ html {
     position: relative;
   }
   
-  .w-tab-link.w--current {
+  .w-tab-link.current {
     background-color: #c8c8c8;
   }
   
@@ -2141,7 +2141,7 @@ html {
     transform: scale(1.5);
   }
 
-  #addproduct-btn {
+  #addproduct {
     position: absolute;
     background-color: white;
     border: none;
@@ -3706,7 +3706,7 @@ html {
     text-decoration: underline;
   }
   
-  .nav-link.w--current {
+  .nav-link.current {
     color: var(--dark);
   }
   
@@ -4624,12 +4624,12 @@ html {
     text-decoration: underline;
   }
   
-  .shop-category-link.w--current {
+  .shop-category-link.current {
     background-color: var(--color-1);
     color: #fff;
   }
   
-  .shop-category-link.w--current:hover {
+  .shop-category-link.current:hover {
     text-decoration: none;
   }
   
@@ -6116,6 +6116,7 @@ html {
   }
   
   .remember label input{
+      width: auto;
       accent-color: var(--color-4);
       margin-right: 3px;
   }

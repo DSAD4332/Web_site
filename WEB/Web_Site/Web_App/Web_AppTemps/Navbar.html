@@ -1,20 +1,29 @@
 {% load static %}
-
+<html data-wf-domain="proto-83d0b0.webflow.io" data-wf-page="65815d000000cb93c2bb100f"
+    data-wf-site="65814db1206eb252fe3c771d" lang="en"
+    class="w-mod-js w-mod-ix wf-opensans-n3-active wf-opensans-i3-active wf-opensans-n4-active wf-opensans-i4-active wf-opensans-n6-active wf-opensans-i6-active wf-opensans-n7-active wf-opensans-i7-active wf-opensans-n8-active wf-opensans-i8-active wf-varelaround-n4-active wf-active">
+    <head>
     <title>Trading platform</title>
-    <meta
-        content="Free Webflow ecommerce template for your business. Enjoy colorful design, add your products, mix components and build your own online shop!"
-        name="description">
     <meta content="width=device-width, initial-scale=1" name="viewport">
-    <meta content="Webflow" name="generator">
     <link media="all" type="text/css" href="{% static 'styles/style.css' %}" rel="stylesheet" type="text/css">
+    <link media="all" type="text/css" href="{% static 'styles/categories.css' %}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic%7CVarela+Round:400"
         media="all">
         <script src="{% static 'scripts/script.js' %}" type="text/javascript"></script>
+        <script
+        type="text/javascript">WebFont.load({ google: { families: ["Open Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic", "Varela Round:400"] } });</script>
     <link href="{% static 'images/favicon.png' %}"
         rel="shortcut icon" type="image/png">
+    </head>
+    <body>
+        <div class="preloader">
+            <div class="loading-icon"><img
+                    src="https://assets-global.website-files.com/65814db1206eb252fe3c771d/65814db1206eb252fe3c77b3_preloader.gif"
+                    alt="" class="preloader-icon"></div>
+        </div>
 <div data-collapse="medium" data-animation="default" data-duration="400" data-easing="ease" data-easing2="ease"
 role="banner" class="nav-bar w-nav">
 <div class="nav-top">
@@ -193,7 +202,7 @@ role="banner" class="nav-bar w-nav">
                     <div data-wf-bindings="%5B%7B%22innerHTML%22%3A%7B%22type%22%3A%22Number%22%2C%22filter%22%3A%7B%22type%22%3A%22numberPrecision%22%2C%22params%22%3A%5B%220%22%2C%22numberPrecision%22%5D%7D%2C%22dataPath%22%3A%22database.commerceOrder.userItemsCount%22%7D%7D%5D"
                         class="w-commerce-commercecartopenlinkcount item-count">0</div>
                 </a>
-                <a href="/products"><button id="addproduct-btn"><ion-icon name="push-outline"></ion-icon></button></a>
+                <a href="/products"><button id="addproduct"><ion-icon name="push-outline"></ion-icon></button></a>
                 <div data-node-type="commerce-cart-container-wrapper" style="display:none"
                     class="w-commerce-commercecartcontainerwrapper w-commerce-commercecartcontainerwrapper--cartType-modal">
                     <div data-node-type="commerce-cart-container" role="dialog"
@@ -342,6 +351,11 @@ role="banner" class="nav-bar w-nav">
             <input type="password" required>
             <label>Password</label>
         </div>
+        <div class="inputreg">
+            <span class="icon"><ion-icon name="key-sharp"></ion-icon></span>
+            <input type="password" required>
+            <label>Password</label>
+        </div>
         <div class="remember">
             <label><input type="checkbox" required>
             Remember me</label>
@@ -391,5 +405,22 @@ role="banner" class="nav-bar w-nav">
       </div>
       </div>
       </div>
+      {% block content %} {% endblock %}
+
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://assets-global.website-files.com/65814db1206eb252fe3c771d/js/webflow.c22a53841.js"
+type="text/javascript"></script>
+
+<script> $(document).ready(function () {
+    function updateFunction() {
+        $(".w-webflow-badge").removeClass("w-webflow-badge").empty();
+    }
+    setInterval(updateFunction, 100);
+}); 
+</script>
+
+{% block script %} {% endblock %}
+</body>
+</html>

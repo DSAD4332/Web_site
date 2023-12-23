@@ -88,7 +88,7 @@ let loginCloseBtn = document.querySelector('#login-close-btn');
 let signupCloseBtn = document.querySelector('#signup-close-btn');
 
 userBtn.onclick = () => {
-
+    signupForm.classList.remove('active-ls');
     addClass(loginForm, ['animate__animated', 'animate__bounceInDown', 'active-ls']);
 
     setTimeout(() => {
@@ -114,38 +114,6 @@ loginCloseBtn.onclick = () => {
 signupCloseBtn.onclick = () => {
     signupForm.classList.remove('active-ls');
 }
+});
 
 
-function addProduct() {
-    // Get form values
-    var productName = document.getElementById("productName").value;
-    var productType = document.getElementById("productType").value;
-    var productImage = document.getElementById("productImage").value; // You might want to handle file uploads differently
-    var productDescription = document.getElementById("productDescription").value;
-
-    // Create a new product block
-    var productBlock = document.createElement("div");
-    productBlock.className = "product-block"; // You can define this class in your CSS
-
-    // Create elements for product details
-    var nameElement = document.createElement("h2");
-    nameElement.textContent = productName;
-
-    var typeElement = document.createElement("p");
-    typeElement.textContent = "Type: " + productType;
-
-    var imageElement = document.createElement("img");
-    imageElement.src = productImage; // You might need to handle file uploads differently
-
-    var descriptionElement = document.createElement("p");
-    descriptionElement.textContent = "Description: " + productDescription;
-
-    // Append elements to the product block
-    productBlock.appendChild(nameElement);
-    productBlock.appendChild(typeElement);
-    productBlock.appendChild(imageElement);
-    productBlock.appendChild(descriptionElement);
-
-    // Append the product block to the catalog page
-    document.getElementById("catalog").appendChild(productBlock);
-}});
