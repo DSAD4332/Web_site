@@ -13,6 +13,7 @@
         href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic%7CVarela+Round:400"
         media="all">
         <script src="{% static 'scripts/script.js' %}" type="text/javascript"></script>
+        <script src="{% static 'scripts/cart.js' %}" type="text/javascript"></script>
         <script
         type="text/javascript">WebFont.load({ google: { families: ["Open Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic", "Varela Round:400"] } });</script>
     <link href="{% static 'images/favicon.png' %}"
@@ -332,6 +333,7 @@ role="banner" class="nav-bar w-nav">
 </div>
 <div class="w-nav-overlay" data-wf-ignore="" id="w-nav-overlay-0"></div>
 </div>
+<div class="shadow">
 <div class="signup-wrapper">
     <div class="formBox" id="section-content">
     <h2>Registration</h2>
@@ -405,6 +407,25 @@ role="banner" class="nav-bar w-nav">
       </div>
       </div>
       </div>
+      <div class="product-view">
+        {% for product in products %}
+            {% if product.id == 1 %}
+        <div class="product-info">
+
+            <h1>{{ product.name }}</h1>
+            <p class="text-grey">{{ product.description }}</p>
+            <div class="product-price">$&nbsp;{{ product.price }}&nbsp;USD</div>
+            <div class="full-width">
+                <form><input type="number">
+                    <div class="buy-buttons"><input type="submit" href="/checkout">Buy now</a></div>
+                </form>
+            </div>
+        </div>
+        <div class="product-image-wrapper"><img src='{{ product.image }}' alt=""></div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
       {% block content %} {% endblock %}
 
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
@@ -420,6 +441,7 @@ type="text/javascript"></script>
     setInterval(updateFunction, 100);
 }); 
 </script>
+
 
 {% block script %} {% endblock %}
 </body>

@@ -87,13 +87,15 @@ let userBtn = document.querySelector('#signup-btn');
 let loginCloseBtn = document.querySelector('#login-close-btn');
 let signupCloseBtn = document.querySelector('#signup-close-btn');
 
+let popupShadow = document.querySelector('.shadow')
+
+
 userBtn.onclick = () => {
     signupForm.classList.remove('active-ls');
-    addClass(loginForm, ['animate__animated', 'animate__bounceInDown', 'active-ls']);
+    popupShadow.style.opacity = "1";
+    popupShadow.style.zIndex = "98";
 
-    setTimeout(() => {
-        removeClass(loginForm, ['animate__animated', 'animate__bounceInDown']);
-    }, 1200);
+    addClass(loginForm, ['active-ls']);
 
 }
 
@@ -109,11 +111,38 @@ loginToggleBtn.onclick = () => {
 
 loginCloseBtn.onclick = () => {
     loginForm.classList.remove('active-ls');
+    popupShadow.style.opacity = "0";
+    popupShadow.style.zIndex = "-1001";
 }
 
 signupCloseBtn.onclick = () => {
     signupForm.classList.remove('active-ls');
+    popupShadow.style.opacity = "0";
+    popupShadow.style.zIndex = "-1001";
 }
+
+let productCard = document.querySelector('.product-card-wrapper');
+let productView = document.querySelector('.product-view');
+let close = document.querySelector('.nav-main');
+productCard.onclick = () => {
+    productView.classList.add('active-ls');
+    productView.style.top = "70px";
+    productView.style.left = "20%";
+    popupShadow.style.opacity = "1";
+    popupShadow.style.zIndex = "98";
+
+    close.onclick = () => {
+        productView.classList.remove('active-ls');
+        popupShadow.style.opacity = "0";
+        popupShadow.style.zIndex = "-1001";
+    }
+}
+
+
 });
+
+
+
+
 
 
