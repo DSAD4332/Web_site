@@ -1,13 +1,12 @@
-# views
 from django.shortcuts import render, redirect
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate
 from rest_framework import viewsets, permissions, status
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from .models import CustomUser, Product, Order, Company, OrderItem, Category, Subcategory, Product, Review, Cart
 from .serializers import CustomUserSerializer, ProductSerializer, OrderSerializer, CompanySerializer, OrderItemSerializer, CategorySerializer, SubcategorySerializer, ProductSerializer, ReviewSerializer, CartSerializer
 from .permissions import IsAdminUser, IsCustomerUser, IsCourierUser, IsCompanyUser
-from .forms import RegistrationForm
+from .forms import CustomUserCreationForm, CustomUserLoginForm
 
 
 def home(request): 
@@ -111,7 +110,7 @@ class OrderViewSet(viewsets.ModelViewSet):
         
     def destroy(self, request, *args, **kwargs):
         order = self.get_object()
-        order.soft_delete()  # Мягкое удаление вместо физического
+        order.soft_delete()  
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 class CompanyViewSet(viewsets.ModelViewSet):
@@ -217,37 +216,45 @@ class CartViewSet(viewsets.ModelViewSet):
 def list_orders(request):
     # Используем select_related для ForeignKey и prefetch_related для ManyToManyField
     orders = Order.objects.select_related('user').prefetch_related('products')
-    return render(request, '/Users/tair/Documents/Колледж/Python/VS/Trading_platform/Web_site/WEB/Web_Site/Web_App/Web_AppTemps/orders/list.html', {'orders': orders})
+    return render(request, 'Web_App/Web_AppTemps/orders/list.html', {'orders': orders})
 
 def list_products(request):
     # Используем prefetch_related для доступа к категориям через подкатегории
     products = Product.objects.prefetch_related('subcategory__category')
-    return render(request, '/Users/tair/Documents/Колледж/Python/VS/Trading_platform/Web_site/WEB/Web_Site/Web_App/Web_AppTemps/products/list.html', {'products': products})
+    return render(request, 'Web_App/Web_AppTemps/products/list.html', {'products': products})
 
 def list_companies(request):
     companies = Company.objects.select_related('category')
-    return render(request, '/Users/tair/Documents/Колледж/Python/VS/Trading_platform/Web_site/WEB/Web_Site/Web_App/Web_AppTemps/companies/list.html', {'companies': companies})
+    return render(request, 'Web_App/Web_AppTemps/companies/list.html', {'companies': companies})
 
-# def registration_view(request):
-#     if request.method == 'POST':
-#         form = RegistrationForm(request.POST)
-#         if form.is_valid():
-#             user = form.save()
-#             login(request, user)  # Вход пользователя после успешной регистрации
-#             return redirect('base')  # Перенаправление на домашнюю страницу или другую страницу
-#     else:
-#         form = RegistrationForm()
+def signup(request):
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('Home')
+    else:
+        form = CustomUserCreationForm()
+    return render(request, 'Navbar.html', {'registration_form': form})
 
-#     return render(request, 'registration.html', {'form': form})
+def custom_login(request):
+    if request.method == 'POST':
+        form = CustomUserLoginForm(data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            remember_me = form.cleaned_data.get('remember_me') 
+            
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                if remember_me:
+                    request.session.set_expiry(1209600) # 2 недели
+                else:
+                    request.session.set_expiry(0) 
 
+                return redirect('Home')
+    else:
+        form = CustomUserLoginForm()
 
-# def register(request):
-#     if request.method == 'POST':
-#         form = CustomUserCreationForm(request.POST)
-#         if form.is_valid():
-#             user = form.save()
-#             login(request, user)
-#             return redirect('home')  # Перенаправление на главную страницу после регистрации
-#     else:
-#         form = CustomUserCreationForm()
-#     return render(request, 'registration/register.html', {'form': form})
+    return render(request, 'Navbar.html', {'login_form': form})
