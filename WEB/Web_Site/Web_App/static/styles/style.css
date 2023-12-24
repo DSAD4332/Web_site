@@ -4619,9 +4619,25 @@ html {
     text-decoration: none;
     display: inline-block;
   }
-  
-  .shop-category-link:hover {
-    text-decoration: underline;
+
+  .shop-category-link::after{
+    content: '';
+    text-decoration: none;
+    position: absolute;
+    left: 8%;
+    bottom: 12.5px;
+    width: 85%;
+    height: 3px;
+    background: var(--color-1);
+    border-radius: 5px;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform .5s;
+  }
+
+  .shop-category-link:hover::after {
+    transform-origin: left;
+    transform: scaleX(1);
   }
   
   .shop-category-link.current {

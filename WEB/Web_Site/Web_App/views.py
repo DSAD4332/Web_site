@@ -59,7 +59,7 @@ def cat_computers(request):
 def cat_household(request): 
     products = Product.objects.all()
     ctx = {'products': products, 'active': 'household'}
-    return render(request, "Cat_Hhousehold.html", ctx)
+    return render(request, "Cat_Household.html", ctx)
 
 def cat_sports(request): 
     products = Product.objects.all()

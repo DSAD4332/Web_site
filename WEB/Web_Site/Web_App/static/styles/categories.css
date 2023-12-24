@@ -19,7 +19,7 @@ div.list {
     justify-content: center;
     overflow: hidden;
     --items: 10;
-    --middle: 1;
+    --middle: 5;
     --position: 1;
   }
   
@@ -34,7 +34,7 @@ div.list {
     justify-content: center;
     overflow: hidden;
     --items: 10;
-    --middle: 1;
+    --middle: 5;
     --position: 1;
   }
   
@@ -43,10 +43,8 @@ div.list {
     height: 50px;
     --r: calc(var(--position) - var(--offset));
     --abs: max(calc(var(--r) * -1), var(--r));
-    transition: all 0.25s linear;
-    transform: rotateY(calc(-10deg * var(--r)))
-      translateX(calc(-300px * var(--r)));
-    z-index: calc((var(--position) - var(--abs)));
+    transition: all 0.5s linear;
+    transform: translateX(calc(-170px * var(--r)));
   }
   
    div.item:nth-of-type(1) {

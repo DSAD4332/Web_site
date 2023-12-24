@@ -13,22 +13,22 @@
                         alt="" class="breadcrumbs-arrow"><a href="/catalog" class="link-grey">Catalog</a><img
                         src="https://assets-global.website-files.com/65814db1206eb252fe3c771d/65814db1206eb252fe3c77ac_arrow-right-mini-icon.svg"
                         alt="" class="breadcrumbs-arrow">
-                    <div>Gadget and Devices</div>
+                    <div>Clothes</div>
                 </div>
             </div>
         </div>
         <div class="section">
             <div class="wrapper">
                 <div class="shop-header">
-                    <h3 class="no-margin w-hidden-small w-hidden-tiny">Gadget and Devices</h3>
+                    <h3 class="no-margin w-hidden-small w-hidden-tiny">Clothes</h3>
                     <a href="/catalog" class="shop-category-link">All Products</a>
                     <div class="shop-categories-wrapper">
                         <div class="list">
                             <div role="list" class="shop-categories w-dyn-items1">
                         <div role="listitem" class="item"><a href="/category/devices"
-                            class="shop-category-link {% if active == 'devices' %} current {% endif %}">Gadget and Devices</a></div>
+                            class="shop-category-link">Gadget and Devices</a></div>
                         <div role="listitem" class="item"><a href="/category/appliances"
-                            class="shop-category-link">Home Appliances</a>
+                            class="shop-category-link ">Home Appliances</a>
                         </div>
                         <div role="listitem" class="item"><a href="/category/TAV"
                             class="shop-category-link">TV, audio, video</a></div>
@@ -43,7 +43,7 @@
                         <div role="listitem" class="item"><a href="/category/construction"
                             class="shop-category-link ">Construction and Renovation</a></div>
                         <div role="listitem" class="item"><a href="/category/clothes"
-                            class="shop-category-link">Clothes</a>
+                            class="shop-category-link {% if active == 'clothes' %} current {% endif %}">Clothes</a>
                         </div>
                         <div role="listitem" class="item"><a href="/category/leisure"
                             class="shop-category-link ">Leisure and Books</a></div>
@@ -87,7 +87,7 @@
                 <div class="full-width w-dyn-list">
                     <div role="list" class="products w-dyn-items">
                             {% for product in products %}
-                                {% if product.subcategory_id == 1 %}
+                                {% if product.subcategory_id == 8 %}
                             <div role="listitem" class="product-card-wrapper w-dyn-item" id="{{ product.id }}">
                                 <a href="#" class="product-card w-inline-block">
                                     <div class="product-card-image-wrapper">
