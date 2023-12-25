@@ -1,5 +1,6 @@
 {% extends 'Navbar.html' %}
 {% block content %}
+{% load static %}
 <html data-wf-domain="proto-83d0b0.webflow.io" data-wf-page="65815d000000cb93c2bb1030"
     data-wf-site="65814db1206eb252fe3c771d" lang="en"
     class="w-mod-js w-mod-ix wf-opensans-n3-active wf-opensans-i3-active wf-opensans-n4-active wf-opensans-i4-active wf-opensans-n6-active wf-opensans-i6-active wf-opensans-n7-active wf-opensans-i7-active wf-opensans-n8-active wf-opensans-i8-active wf-varelaround-n4-active wf-active">
@@ -89,11 +90,38 @@
                               <div class="product-card-image-wrapper">
                                 <img src="{{ product.image }}" alt="{{ product.name }}">
                               </div>
-                              <h6 class="product-card-heading">{{ product.name }}</h6>
+                              <h6 class="product-card-heading" id="prod{{product.id}}">{{ product.name }}</h6>
                               <div class="product-card-price">${{ product.price }} USD</div>
                             </a>
                           </div>
                         {% endfor %}
+                    </div>
+                </div>
+                <div class="product-view">
+                    {% for product in products %}
+                        {% if product.id == 1 %}
+                    <div class="product-info">
+                        <div id="product-close-btn" class="ls-close-btn">
+                            <span><ion-icon name="close-circle-outline"></ion-icon></span>
+                        </div>
+                        <h1>{{ product.name }}</h1>
+                        <p class="text-grey">{{ product.description }}</p>
+                        <div class="product-price">$&nbsp;{{ product.price }}&nbsp;USD</div>
+                        <div class="full-width">
+                            <form><input type="number">
+                                <div class="buy-buttons"><input type="submit" href="/checkout">Buy now</a></div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="product-image-wrapper"><img src='{{ product.image }}' alt=""></div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div>
+                    <div>
+                        <h2>Your Cart</h2>
+                        <ul id="pcart"></ul>
+                        <h4 id="ptotal">Total: 0 $</h4>
                     </div>
                 </div>
             </div>
@@ -218,7 +246,6 @@
 {% endblock %}
 
 {% block script %}
-
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const carousel1 = document.querySelector('.w-dyn-items1');

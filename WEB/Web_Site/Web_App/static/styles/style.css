@@ -2128,6 +2128,19 @@ html {
     --color-2: #009bfa;
   }
 
+  #cart {
+    position: absolute;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    left: -45px;
+    top: 17px;
+    appearance: none;
+    align-items: center;
+    display: flex;
+    transform: scale(1.5);
+  }
+
   #signup-btn {
     position: absolute;
     background-color: white;
@@ -4412,7 +4425,7 @@ html {
     height: 500px;
     margin: 50px;
     padding: 40px;
-    transform: scale(0);
+    transform: translateY(1), scale(0);
     background: var(--haze);
     border: 3px solid var(--color-1);
     border-radius: 20px;
@@ -6074,7 +6087,7 @@ html {
       align-items: center;
       opacity: 0;
       visibility: hidden;
-      z-index: 99;
+      z-index: 100;
       -webkit-transform: translateY(-10%);
       -ms-transform: translateY(-10%);
       transform: translateY(-10%);
@@ -6235,7 +6248,17 @@ html {
       z-index: 99;
       -webkit-transform: translateY(0);
       -ms-transform: translateY(0);
-      transform: translateY(0), scale(1);
+      transform: translateY(0);
   }
   
-  
+  .active-lss {
+    opacity: 1;
+    visibility: visible;
+    top: 70px;
+    left: 20%;
+    pointer-events: auto;
+    z-index: 100;
+    -webkit-transform: translateY(1), scale(1);
+    -ms-transform: translateY(1), scale(1);
+    transform: translateY(1), scale(1);
+}

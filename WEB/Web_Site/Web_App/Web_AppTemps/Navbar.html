@@ -193,6 +193,7 @@ role="banner" class="nav-bar w-nav">
               "
                 data-wf-page-link-href-prefix="" class="w-commerce-commercecartwrapper">
                 <button id="signup-btn"><ion-icon name="person-add-outline"></ion-icon></button>
+                <button id="cart"><ion-icon name="person-add-outline"></ion-icon><span id="count">0</span></button>
                 <a href="#"
                     data-node-type="commerce-cart-open-link"
                     class="w-commerce-commercecartopenlink cart-button w-inline-block" role="button"
@@ -333,7 +334,7 @@ role="banner" class="nav-bar w-nav">
 </div>
 <div class="w-nav-overlay" data-wf-ignore="" id="w-nav-overlay-0"></div>
 </div>
-<div class="shadow">
+<div class="shadow"></div>
 <div class="signup-wrapper">
     <div class="formBox" id="section-content">
     <h2>Registration</h2>
@@ -407,25 +408,14 @@ role="banner" class="nav-bar w-nav">
       </div>
       </div>
       </div>
-      <div class="product-view">
-        {% for product in products %}
-            {% if product.id == 1 %}
-        <div class="product-info">
-
-            <h1>{{ product.name }}</h1>
-            <p class="text-grey">{{ product.description }}</p>
-            <div class="product-price">$&nbsp;{{ product.price }}&nbsp;USD</div>
-            <div class="full-width">
-                <form><input type="number">
-                    <div class="buy-buttons"><input type="submit" href="/checkout">Buy now</a></div>
-                </form>
-            </div>
+    <div>
+        <div>
+            <h2>Your Cart</h2>
+            <ul id="pcart"></ul>
+            <h4 id="ptotal">Total: 0 $</h4>
         </div>
-        <div class="product-image-wrapper"><img src='{{ product.image }}' alt=""></div>
-            {% endif %}
-        {% endfor %}
     </div>
-</div>
+
       {% block content %} {% endblock %}
 
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
