@@ -5,7 +5,8 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import path, include, re_path
 from rest_framework.routers import DefaultRouter
 from . import views
-from .views import CategoryViewSet, SubcategoryViewSet, ProductViewSet, CompanyViewSet, OrderViewSet, CustomUserViewSet, ReviewViewSet, CartViewSet, registration_view
+from django.contrib.auth import views as auth_views
+from .views import CategoryViewSet, SubcategoryViewSet, ProductViewSet, CompanyViewSet, OrderViewSet, CustomUserViewSet, ReviewViewSet, CartViewSet
 
 # Создание маршрутизатора и регистрация наших ViewSets
 router = DefaultRouter()
@@ -49,6 +50,13 @@ urlpatterns = [
     re_path(r'^category/stationery/$', views.cat_stationery, name="Cat_Stationery"),
     re_path(r'^category/shoes/$', views.cat_shoes, name="Cat_Shoes"),
     re_path(r'^products/$', views.products, name="products"),
+    # path('password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
+    # path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
+    # path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    # path('reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
+    path('signup/', views.signup, name='signup'),
+    path('login/', views.custom_login, name='login'),
+    path('', views.home, name='home'),
     path('', include(router.urls)), 
 ]
 
