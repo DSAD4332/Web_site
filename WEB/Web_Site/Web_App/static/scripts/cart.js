@@ -12,6 +12,11 @@ if (stepTime == null) { // Corrected: Use null instead of NULL
     }
 }
 
+let productCart = document.querySelector('.product-card-wrapper');
+let productView = document.querySelector('.product-view');
+let closeBtn = document.querySelector('#product-close-btn');
+
+
 var orders = JSON.parse(localStorage.getItem('.order'));
 var total = localStorage.getItem('total');
 
@@ -34,4 +39,7 @@ var ptotal = document.querySelector('#ptotal');
 function addProduct(pid) {
     pcart.innerHTML += 'new product'
 }
+
+
+
 });

@@ -89,12 +89,14 @@ let signupCloseBtn = document.querySelector('#signup-close-btn');
 
 let popupShadow = document.querySelector('.shadow')
 
-
 userBtn.onclick = () => {
     signupForm.classList.remove('active-ls');
     popupShadow.style.opacity = "1";
     popupShadow.style.zIndex = "98";
+    popupShadow.style.opacity = "1";
+    popupShadow.style.zIndex = "98";
 
+    addClass(loginForm, ['active-ls']);
     addClass(loginForm, ['active-ls']);
 
 }
@@ -111,6 +113,8 @@ loginToggleBtn.onclick = () => {
 
 loginCloseBtn.onclick = () => {
     loginForm.classList.remove('active-ls');
+    popupShadow.style.opacity = "0";
+    popupShadow.style.zIndex = "-1001";
     popupShadow.style.opacity = "0";
     popupShadow.style.zIndex = "-1001";
 }

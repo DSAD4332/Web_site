@@ -341,7 +341,7 @@ role="banner" class="nav-bar w-nav">
     <form method="post" action="{% url 'signup' %}"> 
         {% csrf_token %} 
         {{ registration_form.as_p }}
-        {% for field in form %}git
+        {% for field in form %}
         <div class="fieldWrapper">
             {{ field.label_tag }} {{ field }}
             {% if field.errors %}
@@ -352,6 +352,11 @@ role="banner" class="nav-bar w-nav">
         </div>
         {% endfor %}
         <button class="buttonreg" type="submit">Register</button>
+        <div class="register">
+            <p>Already has an account?
+              <a href="#"><span id="toggle-login">Login</span></a>
+            </p>
+        </div>
         <div class="register">
             <p>Already has an account?
               <a href="#"><span id="toggle-login">Login</span></a>
@@ -392,8 +397,8 @@ role="banner" class="nav-bar w-nav">
     </div>
 
 </div>
-    <div>
-        <div>
+    <div class="cart-wrapper">
+        <div class="product-list">
             <h2>Your Cart</h2>
             <ul id="pcart"></ul>
             <h4 id="ptotal">Total: 0 $</h4>

@@ -6081,7 +6081,6 @@ html {
       background: var(--haze);
       border: 3px solid var(--color-1);
       border-radius: 20px;
-      backdrop-filter: blur(20px);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -6170,27 +6169,33 @@ html {
       margin-right: 3px;
   }
   
-  a {
-      color: #162938;
-      text-decoration: none;
+  .cart-wrapper {
+    position: fixed;
+    width: 400px;
+    height: 440px;
+    top: -1000px;
+    left: 1000px;
+    background: var(--haze);
+    border: 3px solid var(--color-1);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 100;
+    -webkit-transform: translateY(-10%);
+    -ms-transform: translateY(-10%);
+    transform: translateY(-10%);
+    -webkit-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    transition: all 0.4s ease;
   }
-  a::after {
-      content: '';
-      position: absolute;
-      left: 260px;
-      bottom: 105px;
-      width: 26%;
-      height: 3px;
-      background: var();
-      border-radius: 5px;
-      transform-origin: right;
-      transform: scaleX(0);
-      transition: transform .5s;
-  }
-  
-  a:hover::after {
-      transform-origin: left;
-      transform: scaleX(1);
+
+  .product-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   
   .buttonreg {
@@ -6258,7 +6263,7 @@ html {
     left: 20%;
     pointer-events: auto;
     z-index: 100;
-    -webkit-transform: translateY(1), scale(1);
-    -ms-transform: translateY(1), scale(1);
-    transform: translateY(1), scale(1);
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
 }

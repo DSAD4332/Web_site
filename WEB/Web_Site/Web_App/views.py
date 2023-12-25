@@ -1,4 +1,5 @@
 # views
+# views
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from rest_framework import viewsets, permissions, status
@@ -206,6 +207,7 @@ class OrderViewSet(viewsets.ModelViewSet):
     def destroy(self, request, *args, **kwargs):
         order = self.get_object()
         order.soft_delete()  # Мягкое удаление вместо физического
+        order.soft_delete()  # Мягкое удаление вместо физического
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 class CompanyViewSet(viewsets.ModelViewSet):
@@ -317,9 +319,11 @@ def list_products(request):
     # Используем prefetch_related для доступа к категориям через подкатегории
     products = Product.objects.prefetch_related('subcategory__category')
     return render(request, '/Users/tair/Documents/Колледж/Python/VS/Trading_platform/Web_site/WEB/Web_Site/Web_App/Web_AppTemps/products/list.html', {'products': products})
+    return render(request, '/Users/tair/Documents/Колледж/Python/VS/Trading_platform/Web_site/WEB/Web_Site/Web_App/Web_AppTemps/products/list.html', {'products': products})
 
 def list_companies(request):
     companies = Company.objects.select_related('category')
+    return render(request, '/Users/tair/Documents/Колледж/Python/VS/Trading_platform/Web_site/WEB/Web_Site/Web_App/Web_AppTemps/companies/list.html', {'companies': companies})
     return render(request, '/Users/tair/Documents/Колледж/Python/VS/Trading_platform/Web_site/WEB/Web_Site/Web_App/Web_AppTemps/companies/list.html', {'companies': companies})
 
 def signup(request):
