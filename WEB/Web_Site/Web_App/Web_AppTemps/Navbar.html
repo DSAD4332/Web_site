@@ -337,96 +337,57 @@ role="banner" class="nav-bar w-nav">
 <div class="signup-wrapper">
     <div class="formBox" id="section-content">
     <h2>Registration</h2>
-    <form method="post" action="#">
-        <div class="inputreg">
-            <span class="icon"><ion-icon name="person-circle-sharp"></ion-icon></span>
-            <input type="text" required>
-            <label>Username</label>
+    <form method="post" action="{% url 'signup' %}"> 
+        {% csrf_token %} 
+        {{ registration_form.as_p }}
+        {% for field in form %}
+        <div class="fieldWrapper">
+            {{ field.label_tag }} {{ field }}
+            {% if field.errors %}
+                <div class="fieldErrors">
+                    {{ field.errors }}
+                </div>
+            {% endif %}
         </div>
-        <div class="inputreg">
-            <span class="icon"><ion-icon name="at-circle-sharp"></ion-icon></span>
-            <input type="email" required>
-            <label>Email</label>
-        </div>
-        <div class="inputreg">
-            <span class="icon"><ion-icon name="key-sharp"></ion-icon></span>
-            <input type="password" required>
-            <label>Password</label>
-        </div>
-        <div class="inputreg">
-            <span class="icon"><ion-icon name="key-sharp"></ion-icon></span>
-            <input type="password" required>
-            <label>Password</label>
-        </div>
-        <div class="remember">
-            <label><input type="checkbox" required>
-            Remember me</label>
-            <a href="/">Forgot password?</a>
-        </div>
+        {% endfor %}
         <button class="buttonreg" type="submit">Register</button>
-        <div class="register">
-            <p>Already has an account?
-              <a href="#"><span id="toggle-login">Login</span></a>
-            </p>
-        </div>
     </form>
     <div id="signup-close-btn" class="ls-close-btn">
       <span><ion-icon name="close-circle-outline"></ion-icon></span>
     </div>
     </div>
-    </div>
-  
-    <div class="login-wrapper">
-      <div class="formBox" id="section-content">
-      <h2>Login</h2>
-      <form method="post" action="#">
-          <div class="inputreg">
-              <span class="icon"><ion-icon name="at-circle-sharp"></ion-icon></span>
-              <input type="email" required>
-              <label>Email</label>
-          </div>
-          <div class="inputreg">
-              <span class="icon"><ion-icon name="key-sharp"></ion-icon></span>
-              <input type="password" required>
-              <label>Password</label>
-          </div>
-          <div class="remember">
-              <label><input type="checkbox" required>
-              Remember me</label>
-              <a href="/">Forgot password?</a>
-          </div>
-          <button class="buttonreg" type="submit">Login</button>
-          <div class="register">
-              <p>Don't have an account?
-                  <a href="#"><span id="toggle-signup">Signup now</span></a>
-              </p>
-          </div>
-      </form>
-      <div id="login-close-btn" class="ls-close-btn">
-          <span><ion-icon name="close-circle-outline"></ion-icon></span>
-      </div>
-      </div>
-      </div>
-      <div class="product-view">
-        {% for product in products %}
-            {% if product.id == 1 %}
-        <div class="product-info">
-
-            <h1>{{ product.name }}</h1>
-            <p class="text-grey">{{ product.description }}</p>
-            <div class="product-price">$&nbsp;{{ product.price }}&nbsp;USD</div>
-            <div class="full-width">
-                <form><input type="number">
-                    <div class="buy-buttons"><input type="submit" href="/checkout">Buy now</a></div>
-                </form>
-            </div>
-        </div>
-        <div class="product-image-wrapper"><img src='{{ product.image }}' alt=""></div>
-            {% endif %}
-        {% endfor %}
-    </div>
 </div>
-      {% block content %} {% endblock %}
+
+<div class="login-wrapper">
+    <div class="formBox" id="section-content">
+        <h2>Login</h2>
+        <form method="post" action="{% url 'login' %}"> 
+            {% csrf_token %}
+            {% for field in login_form %}
+            <div class="fieldWrapper">
+                {{ field.label_tag }} {{ field }}
+                {% if field.errors %}
+                    <div class="fieldErrors">
+                        {{ field.errors }}
+                    </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+            <button class="buttonreg" type="submit">Login</button>
+            <div class="register">
+                <p>Don't have an account?
+                    <a href="#"><span id="toggle-signup">Signup now</span></a>
+                </p>
+            </div>
+        </form>
+        <div id="login-close-btn" class="ls-close-btn">
+            <span><ion-icon name="close-circle-outline"></ion-icon></span>
+        </div>
+    </div>
+
+</div>
+
+
 
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
