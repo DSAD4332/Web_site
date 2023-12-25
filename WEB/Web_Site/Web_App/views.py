@@ -7,7 +7,8 @@ from .models import CustomUser, Product, Order, Company, OrderItem, Category, Su
 from .serializers import CustomUserSerializer, ProductSerializer, OrderSerializer, CompanySerializer, OrderItemSerializer, CategorySerializer, SubcategorySerializer, ProductSerializer, ReviewSerializer, CartSerializer
 from .permissions import IsAdminUser, IsCustomerUser, IsCourierUser, IsCompanyUser
 from .forms import CustomUserCreationForm, CustomUserLoginForm
-
+from django.http import JsonResponse
+from django.template.loader import render_to_string
 
 def home(request): 
     return render(request, "Home.html")
@@ -232,10 +233,15 @@ def signup(request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('Home')
+            # Перенаправление после успешной регистрации
+            redirect(request.META.get('HTTP_REFERER', 'home'))
+        else:
+            # Возврат к форме с отображением ошибок
+            return render(request, 'Navbar.html', {'registration_form': form})
     else:
         form = CustomUserCreationForm()
     return render(request, 'Navbar.html', {'registration_form': form})
+
 
 def custom_login(request):
     if request.method == 'POST':
@@ -253,7 +259,7 @@ def custom_login(request):
                 else:
                     request.session.set_expiry(0) 
 
-                return redirect('Home')
+                redirect(request.META.get('HTTP_REFERER', 'home'))
     else:
         form = CustomUserLoginForm()
 

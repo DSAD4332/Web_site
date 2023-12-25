@@ -38,6 +38,7 @@ urlpatterns = [
     # path('reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
     path('signup/', views.signup, name='signup'),
     path('login/', views.custom_login, name='login'),
+    path('', views.home, name='home'),
     path('', include(router.urls)), 
 ]
 

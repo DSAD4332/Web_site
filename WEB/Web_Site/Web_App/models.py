@@ -4,9 +4,8 @@ from django.contrib.auth.models import AbstractUser
 
 class CustomUser(AbstractUser):
     email = models.EmailField(unique=True)
-    address = models.CharField(max_length=255, db_index=True)
-    role = models.CharField(max_length=10, choices=[('customer', 'Customer'), ('admin', 'Admin'), ('company', 'Company')])
-
+    address = models.CharField(max_length=255, blank=True, null=True)
+    role = models.CharField(max_length=10, choices=[('customer', 'Customer'), ('admin', 'Admin'), ('company', 'Company')], default='customer')
     class Meta:
         db_table = 'custom_user'
 

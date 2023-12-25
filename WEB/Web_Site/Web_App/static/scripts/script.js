@@ -149,3 +149,4 @@ function addProduct() {
     // Append the product block to the catalog page
     document.getElementById("catalog").appendChild(productBlock);
 }});
+
