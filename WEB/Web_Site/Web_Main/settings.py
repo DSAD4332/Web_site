@@ -80,6 +80,7 @@ TEMPLATES = [
                 'django.template.context_processors.csrf',
                 'Web_App.context_processors.registration_form',
                 'Web_App.context_processors.login_form',
+                'Web_App.context_processors.product_form',
             ],
         },
     },

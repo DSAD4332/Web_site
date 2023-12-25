@@ -1,9 +1,7 @@
 {% extends 'Navbar.html' %}
 {% block content %}
 {% load static %}
-<html data-wf-domain="proto-83d0b0.webflow.io" data-wf-page="65815d000000cb93c2bb1030"
-    data-wf-site="65814db1206eb252fe3c771d" lang="en"
-    class="w-mod-js w-mod-ix wf-opensans-n3-active wf-opensans-i3-active wf-opensans-n4-active wf-opensans-i4-active wf-opensans-n6-active wf-opensans-i6-active wf-opensans-n7-active wf-opensans-i7-active wf-opensans-n8-active wf-opensans-i8-active wf-varelaround-n4-active wf-active">
+<html>
 
     <div class="page-wrapper">
         <div class="section no-padding-vertical">
@@ -85,7 +83,8 @@
                 <div class="full-width w-dyn-list">
                     <div role="list" class="products w-dyn-items">
                         {% for product in products %}
-                        <div role="listitem" class="product-card-wrapper w-dyn-item" id="{{ product.id }}">
+                        <button onclick="cardSelector('{{ product.id }}')">
+                        <div role="listitem" class="product-card-wrapper w-dyn-item" id="card{{ product.id }}">
                             <a href="#" class="product-card w-inline-block">
                               <div class="product-card-image-wrapper">
                                 <img src="{{ product.image }}" alt="{{ product.name }}">
@@ -94,36 +93,30 @@
                               <div class="product-card-price">${{ product.price }} USD</div>
                             </a>
                           </div>
+                        </button>
                         {% endfor %}
                     </div>
                 </div>
-                <div class="product-view">
+                
                     {% for product in products %}
-                        {% if product.id == 1 %}
+                <div class="product-view" id="view{{ product.id }}">
                     <div class="product-info">
                         <div id="product-close-btn" class="ls-close-btn">
                             <span><ion-icon name="close-circle-outline"></ion-icon></span>
                         </div>
-                        <h1>{{ product.name }}</h1>
+                        <h1 id="prod{{product.id}}">{{ product.name }}</h1>
                         <p class="text-grey">{{ product.description }}</p>
                         <div class="product-price">$&nbsp;{{ product.price }}&nbsp;USD</div>
                         <div class="full-width">
                             <form><input type="number">
-                                <div class="buy-buttons"><input type="submit" href="/checkout">Buy now</a></div>
+                                <button href="#" type="button" class="btn" onclick="addProduct('{{ product.id }}')">Add to cart</button>
                             </form>
                         </div>
                     </div>
                     <div class="product-image-wrapper"><img src='{{ product.image }}' alt=""></div>
-                        {% endif %}
+                </div>
                     {% endfor %}
-                </div>
-                <div>
-                    <div>
-                        <h2>Your Cart</h2>
-                        <ul id="pcart"></ul>
-                        <h4 id="ptotal">Total: 0 $</h4>
-                    </div>
-                </div>
+
             </div>
         </div>
         <div class="section no-padding-vertical">
@@ -180,17 +173,12 @@
                         class="instagram-link w-inline-block"><img
                             src="https://assets-global.website-files.com/65814db1206eb252fe3c771d/65814db1206eb252fe3c7794_instagram-06.jpg"
                             alt="" class="full-width"></a></div><a href="https://instagram.com" target="_blank"
-                    class="button w-button">See More Photos</a>
+                    class="btn w-button">See More Photos</a>
             </div>
         </div>
         <div class="section color no-padding-vertical">
             <div class="wrapper text-white"></div>
         </div>
-    </div>
-    <div class="preloader">
-        <div class="loading-icon"><img
-                src="https://assets-global.website-files.com/65814db1206eb252fe3c771d/65814db1206eb252fe3c77b3_preloader.gif"
-                alt="" class="preloader-icon"></div>
     </div>
     <div class="wrapper">
         <div class="intro">
@@ -243,35 +231,90 @@
     <div class="section color no-padding-vertical">
         <div class="wrapper text-white"></div>
     </div>
-{% endblock %}
+    {% endblock %}
 
-{% block script %}
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const carousel1 = document.querySelector('.w-dyn-items1');
-    const carousel2 = document.querySelector('.w-dyn-items2');
-
-    let currentPosition = 1;
-
-    carousel1.addEventListener('wheel', (event) => {
-        event.preventDefault();
-
-        currentPosition += (event.deltaY > 0) ? 1 : -1;
-
-        currentPosition = Math.min(Math.max(currentPosition, 1), 10);
-
-        carousel1.style.setProperty('--position', currentPosition);
+    {% block script %}
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const carousel1 = document.querySelector('.w-dyn-items1');
+        const carousel2 = document.querySelector('.w-dyn-items2');
+    
+        let currentPosition = 1;
+    
+        carousel1.addEventListener('wheel', (event) => {
+            event.preventDefault();
+    
+            currentPosition += (event.deltaY > 0) ? 1 : -1;
+    
+            currentPosition = Math.min(Math.max(currentPosition, 1), 10);
+    
+            carousel1.style.setProperty('--position', currentPosition);
+        });
+    
+        carousel2.addEventListener('wheel', (event) => {
+            event.preventDefault();
+    
+            currentPosition += (event.deltaY > 0) ? 1 : -1;
+    
+            currentPosition = Math.min(Math.max(currentPosition, 1), 10);
+    
+            carousel2.style.setProperty('--position', currentPosition);
+        });
     });
 
-    carousel2.addEventListener('wheel', (event) => {
-        event.preventDefault();
+    
+    let productCard;
+    let productView;
+    let closeBtn = document.querySelector('#cart-close-btn');
+    let popupShadow = document.querySelector('.shadow');
+    
+    function cardSelector(cid) {
+        console.log('Функция cardSelector выполнена для карты', cid);
+        productCard = document.getElementById('card' + cid);
+        productCard.onclick = () => {
+            openView(cid);
+            popupShadow.style.opacity = "1";
+            popupShadow.style.zIndex = "98";
+        };
+    }
+    
+    function openView(vid) {
+    productView = document.getElementById('view' + vid);
+    productView.classList.add('active-lss');
+    }
+    
+    var hours = 0;
+    var now = new Date().getTime(); // Corrected: Use new Date() to create a Date object
+    var stepTime = localStorage.getItem('stepTime');
+    
+    if (stepTime == null) { // Corrected: Use null instead of NULL
+    localStorage.setItem('stepTime', now);
+    } else {
+    if (now - stepTime > hours * 60 * 60 * 1000) {
+    localStorage.clear();
+    localStorage.setItem('stepTime', now);
+    }
+    }  
+    var pcart = document.querySelector('#pcart');
+    var ptotal = document.querySelector('#ptotal');
+    var wrappercart = document.querySelector('.cart-wrapper');
+    
+    cart.onclick = () => {
+    wrappercart.classList.add('active-lss');
+    popupShadow.style.opacity = "1";
+    popupShadow.style.zIndex = "98";
+    }
+    
+    closeBtn.onclick = () => {
+    wrappercart.classList.remove('active-lss');
+    popupShadow.style.opacity = "0";
+    popupShadow.style.zIndex = "-1001";
+    }
+    
+    function addProduct(pid) {
+    pcart.innerHTML += '<li>' + pid + '</li>';
+    }
+    </script>
+    
 
-        currentPosition += (event.deltaY > 0) ? 1 : -1;
-
-        currentPosition = Math.min(Math.max(currentPosition, 1), 10);
-
-        carousel2.style.setProperty('--position', currentPosition);
-    });
-});
-</script>
 {% endblock %}

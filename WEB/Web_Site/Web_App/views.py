@@ -8,7 +8,7 @@ from rest_framework.decorators import action
 from .models import CustomUser, Product, Order, Company, OrderItem, Category, Subcategory, Product, Review, Cart
 from .serializers import CustomUserSerializer, ProductSerializer, OrderSerializer, CompanySerializer, OrderItemSerializer, CategorySerializer, SubcategorySerializer, ProductSerializer, ReviewSerializer, CartSerializer
 from .permissions import IsAdminUser, IsCustomerUser, IsCourierUser, IsCompanyUser
-from .forms import CustomUserCreationForm, CustomUserLoginForm
+from .forms import CustomUserCreationForm, CustomUserLoginForm, ProductForm
 from django.http import JsonResponse
 from django.template.loader import render_to_string
 
@@ -362,3 +362,14 @@ def custom_login(request):
         form = CustomUserLoginForm()
 
     return render(request, 'Navbar.html', {'login_form': form})
+
+def add_product(request):
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            # обработка и сохранение данных формы
+            return redirect('Product')
+    else:
+        form = ProductForm()
+
+    return render(request, 'Product.html', {'product_form': form})

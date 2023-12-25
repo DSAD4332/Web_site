@@ -37,8 +37,8 @@ class Product(models.Model):
     subcategory = models.ForeignKey(Subcategory, related_name='products', on_delete=models.SET_NULL, null=True)
     image = models.ImageField(upload_to='product_images/')
     stock_quantity = models.IntegerField()
-    discount = models.DecimalField(max_digits=5, decimal_places=2, default=0.00, help_text="(Скидка в процентах)")
-    stock_status = models.CharField(max_length=15, choices=STOCK_STATUS_CHOICES, default='in_stock')
+    discount = models.DecimalField(max_digits=5, decimal_places=2, default=0.00, help_text="(Скидка в процентах)", null=True)
+    stock_status = models.CharField(max_length=15, choices=STOCK_STATUS_CHOICES, default='in_stock', null=True)
 
 
     def __str__(self):

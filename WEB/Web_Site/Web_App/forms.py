@@ -1,6 +1,6 @@
 # forms.py
 from django import forms
-from .models import CustomUser
+from .models import CustomUser, Product, Subcategory
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 class CustomUserCreationForm(UserCreationForm):
@@ -23,3 +23,12 @@ class CustomUserLoginForm(AuthenticationForm):
         self.fields['username'].widget.attrs.update({'class': 'your-input-class'})
         self.fields['password'].widget.attrs.update({'class': 'your-password-class'})
         self.fields['remember_me'].widget.attrs.update({'class': 'your-checkbox-class'})
+
+class ProductForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ['name', 'description', 'price', 'subcategory', 'image']
+        widgets = {
+            'image': forms.FileInput(attrs={'class': 'custom-file-input'}),
+            }
+    subcategory = forms.ModelChoiceField(queryset=Subcategory.objects.all(), empty_label="Выберите подкатегорию")

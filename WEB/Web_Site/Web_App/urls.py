@@ -49,6 +49,7 @@ urlpatterns = [
     re_path(r'^category/stationery/$', views.cat_stationery, name="Cat_Stationery"),
     re_path(r'^category/shoes/$', views.cat_shoes, name="Cat_Shoes"),
     re_path(r'^products/$', views.products, name="products"),
+    path('product/', views.add_product, name='product'),
     path('', include(router.urls)), 
 ]
 

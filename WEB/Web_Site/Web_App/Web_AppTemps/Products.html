@@ -2,52 +2,14 @@
 
 {% block content %}
 <div class="page-wrapper">
-<main id="catalog" method="post" enctype="multipart/form-data">
-    <div class="addproduct-wrapper">
-    <form id="addProductForm">
-    <label for="productName">Название товара:</label>
-    <input type="text" id="productName" name="productName" required>
-
-    <label for="productType">Тип товара:</label>
-    <input type="text" id="productType" name="productType" required>
-
-    <label for="productImage">Изображение товара:</label>
-    <input type="file" id="productImage" name="productImage" accept="image/*" required>
-
-    <label for="productPrice">Цена товара:</label>
-    <input type="text" id="productPrice" name="productPrice" required>
-
-    <label for="productDescription">Описание товара:</label>
-    <textarea id="productDescription" name="productDescription" rows="4" required></textarea>
-
-    <button class="button" type="button" onclick="saveProductData()">Добавить товар</button>
-    </form>
-    </div>
-</main>
+    <main id="catalog">
+        <div class="addproduct-wrapper">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ product_form.as_p }}
+                <button class="btn" type="submit">Добавить товар</button>
+            </form>
+        </div>
+    </main>
 </div>
 {% endblock %}
-
-{% block script %}
-<script>
-function saveProductData() {
-    var productName = document.getElementById("productName").value;
-    var productType = document.getElementById("productType").value;
-    var productImage = document.getElementById("productImage").value; // или другой способ загрузки файла
-    var productPrice = document.getElementById("productPrice").value;
-    var productDescription = document.getElementById("productDescription").value;
-
-
-    var productData = {
-        productName: productName,
-        productType: productType,
-        productImage: productImage,
-        productPrice: productPrice,
-        productDescription: productDescription
-    };
-
-    // Сохраняем данные в localStorage
-    localStorage.setItem('productData', JSON.stringify(productData));
-    console.log("Saved");
-}
-</script>
-{% endblock%}
