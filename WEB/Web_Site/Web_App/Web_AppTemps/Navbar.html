@@ -338,32 +338,19 @@ role="banner" class="nav-bar w-nav">
 <div class="signup-wrapper">
     <div class="formBox" id="section-content">
     <h2>Registration</h2>
-    <form method="post" action="#">
-        <div class="inputreg">
-            <span class="icon"><ion-icon name="person-circle-sharp"></ion-icon></span>
-            <input type="text" required>
-            <label>Username</label>
+    <form method="post" action="{% url 'signup' %}"> 
+        {% csrf_token %} 
+        {{ registration_form.as_p }}
+        {% for field in form %}git
+        <div class="fieldWrapper">
+            {{ field.label_tag }} {{ field }}
+            {% if field.errors %}
+                <div class="fieldErrors">
+                    {{ field.errors }}
+                </div>
+            {% endif %}
         </div>
-        <div class="inputreg">
-            <span class="icon"><ion-icon name="at-circle-sharp"></ion-icon></span>
-            <input type="email" required>
-            <label>Email</label>
-        </div>
-        <div class="inputreg">
-            <span class="icon"><ion-icon name="key-sharp"></ion-icon></span>
-            <input type="password" required>
-            <label>Password</label>
-        </div>
-        <div class="inputreg">
-            <span class="icon"><ion-icon name="key-sharp"></ion-icon></span>
-            <input type="password" required>
-            <label>Password</label>
-        </div>
-        <div class="remember">
-            <label><input type="checkbox" required>
-            Remember me</label>
-            <a href="/">Forgot password?</a>
-        </div>
+        {% endfor %}
         <button class="buttonreg" type="submit">Register</button>
         <div class="register">
             <p>Already has an account?
@@ -375,39 +362,36 @@ role="banner" class="nav-bar w-nav">
       <span><ion-icon name="close-circle-outline"></ion-icon></span>
     </div>
     </div>
+</div>
+
+<div class="login-wrapper">
+    <div class="formBox" id="section-content">
+        <h2>Login</h2>
+        <form method="post" action="{% url 'login' %}"> 
+            {% csrf_token %}
+            {% for field in login_form %}
+            <div class="fieldWrapper">
+                {{ field.label_tag }} {{ field }}
+                {% if field.errors %}
+                    <div class="fieldErrors">
+                        {{ field.errors }}
+                    </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+            <button class="buttonreg" type="submit">Login</button>
+            <div class="register">
+                <p>Don't have an account?
+                    <a href="#"><span id="toggle-signup">Signup now</span></a>
+                </p>
+            </div>
+        </form>
+        <div id="login-close-btn" class="ls-close-btn">
+            <span><ion-icon name="close-circle-outline"></ion-icon></span>
+        </div>
     </div>
-  
-    <div class="login-wrapper">
-      <div class="formBox" id="section-content">
-      <h2>Login</h2>
-      <form method="post" action="#">
-          <div class="inputreg">
-              <span class="icon"><ion-icon name="at-circle-sharp"></ion-icon></span>
-              <input type="email" required>
-              <label>Email</label>
-          </div>
-          <div class="inputreg">
-              <span class="icon"><ion-icon name="key-sharp"></ion-icon></span>
-              <input type="password" required>
-              <label>Password</label>
-          </div>
-          <div class="remember">
-              <label><input type="checkbox" required>
-              Remember me</label>
-              <a href="/">Forgot password?</a>
-          </div>
-          <button class="buttonreg" type="submit">Login</button>
-          <div class="register">
-              <p>Don't have an account?
-                  <a href="#"><span id="toggle-signup">Signup now</span></a>
-              </p>
-          </div>
-      </form>
-      <div id="login-close-btn" class="ls-close-btn">
-          <span><ion-icon name="close-circle-outline"></ion-icon></span>
-      </div>
-      </div>
-      </div>
+
+</div>
     <div>
         <div>
             <h2>Your Cart</h2>

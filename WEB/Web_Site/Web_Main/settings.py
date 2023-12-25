@@ -78,6 +78,8 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.csrf',
+                'Web_App.context_processors.registration_form',
+                'Web_App.context_processors.login_form',
             ],
         },
     },
