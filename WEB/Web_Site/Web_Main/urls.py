@@ -28,3 +28,4 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('', include(('Web_App.urls', 'Web_App'))),
 ]
+

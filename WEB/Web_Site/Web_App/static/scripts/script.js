@@ -87,13 +87,15 @@ let userBtn = document.querySelector('#signup-btn');
 let loginCloseBtn = document.querySelector('#login-close-btn');
 let signupCloseBtn = document.querySelector('#signup-close-btn');
 
+let popupShadow = document.querySelector('.shadow')
+
+
 userBtn.onclick = () => {
+    signupForm.classList.remove('active-ls');
+    popupShadow.style.opacity = "1";
+    popupShadow.style.zIndex = "98";
 
-    addClass(loginForm, ['animate__animated', 'animate__bounceInDown', 'active-ls']);
-
-    setTimeout(() => {
-        removeClass(loginForm, ['animate__animated', 'animate__bounceInDown']);
-    }, 1200);
+    addClass(loginForm, ['active-ls']);
 
 }
 
@@ -109,44 +111,37 @@ loginToggleBtn.onclick = () => {
 
 loginCloseBtn.onclick = () => {
     loginForm.classList.remove('active-ls');
+    popupShadow.style.opacity = "0";
+    popupShadow.style.zIndex = "-1001";
 }
 
 signupCloseBtn.onclick = () => {
     signupForm.classList.remove('active-ls');
+    popupShadow.style.opacity = "0";
+    popupShadow.style.zIndex = "-1001";
+}
+
+let productCard = document.querySelector('.product-card-wrapper');
+let productView = document.querySelector('.product-view');
+let close = document.querySelector('.nav-main');
+productCard.onclick = () => {
+    productView.classList.add('active-ls');
+    productView.style.top = "70px";
+    productView.style.left = "20%";
+    popupShadow.style.opacity = "1";
+    popupShadow.style.zIndex = "98";
+
+    close.onclick = () => {
+        productView.classList.remove('active-ls');
+        popupShadow.style.opacity = "0";
+        popupShadow.style.zIndex = "-1001";
+    }
 }
 
 
-function addProduct() {
-    // Get form values
-    var productName = document.getElementById("productName").value;
-    var productType = document.getElementById("productType").value;
-    var productImage = document.getElementById("productImage").value; // You might want to handle file uploads differently
-    var productDescription = document.getElementById("productDescription").value;
+});
 
-    // Create a new product block
-    var productBlock = document.createElement("div");
-    productBlock.className = "product-block"; // You can define this class in your CSS
-
-    // Create elements for product details
-    var nameElement = document.createElement("h2");
-    nameElement.textContent = productName;
-
-    var typeElement = document.createElement("p");
-    typeElement.textContent = "Type: " + productType;
-
-    var imageElement = document.createElement("img");
-    imageElement.src = productImage; // You might need to handle file uploads differently
-
-    var descriptionElement = document.createElement("p");
-    descriptionElement.textContent = "Description: " + productDescription;
-
-    // Append elements to the product block
-    productBlock.appendChild(nameElement);
-    productBlock.appendChild(typeElement);
-    productBlock.appendChild(imageElement);
-    productBlock.appendChild(descriptionElement);
 
     // Append the product block to the catalog page
     document.getElementById("catalog").appendChild(productBlock);
 }});
-

@@ -13,8 +13,7 @@ from django.template.loader import render_to_string
 def home(request): 
     return render(request, "Home.html")
   
-def catalog(request): 
-    return render(request, "Catalog.html") 
+
   
 def contacts(request): 
     return render(request, "Contacts.html")
@@ -28,20 +27,116 @@ def cooperation(request):
 def order_confirmation(request): 
     return render(request, "Order_confirmation.html")
 
-def categories_stuffedAnimals(request): 
-    return render(request, "Categories_stuffedAnimals.html")
-
-def teddybear(request): 
-    return render(request, "Teddybear.html")
-
 def products(request): 
     return render(request, "Products.html")
 
+def catalog(request): 
+    products = Product.objects.all()
+    ctx = {'products': products, 'active': 'all'}
+    return render(request, "Catalog.html", ctx) 
 
-class IsOwnerOrAdmin(permissions.BasePermission):
-    def has_object_permission(self, request, view, obj):
-        # Разрешить удаление, если пользователь является владельцем объекта или администратором
-        return obj.user == request.user or request.user.is_staff
+def cat_devices(request): 
+    products = Product.objects.all()
+    ctx = {'products': products, 'active': 'devices'}
+    return render(request, "Cat_Gadget_Devices.html", ctx)
+
+def cat_appliances(request): 
+    products = Product.objects.all()
+    ctx = {'products': products, 'active': 'appliances'}
+    return render(request, "Cat_Appliances.html", ctx)
+
+def cat_TAV(request): 
+    products = Product.objects.all()
+    ctx = {'products': products, 'active': 'TAV'}
+    return render(request, "Cat_TAV.html", ctx)
+
+def cat_computers(request): 
+    products = Product.objects.all()
+    ctx = {'products': products, 'active': 'computers'}
+    return render(request, "Cat_Computers.html", ctx)
+
+def cat_household(request): 
+    products = Product.objects.all()
+    ctx = {'products': products, 'active': 'household'}
+    return render(request, "Cat_Household.html", ctx)
+
+def cat_sports(request): 
+    products = Product.objects.all()
+    ctx = {'products': products, 'active': 'sports'}
+    return render(request, "Cat_Sports.html", ctx)
+
+def cat_construction(request): 
+    products = Product.objects.all()
+    ctx = {'products': products, 'active': 'construction'}
+    return render(request, "Cat_Construction.html", ctx)
+
+def cat_clothes(request): 
+    products = Product.objects.all()
+    ctx = {'products': products, 'active': 'clothes'}
+    return render(request, "Cat_Clothes.html", ctx)
+
+def cat_leisure(request): 
+    products = Product.objects.all()
+    ctx = {'products': products, 'active': 'leisure'}
+    return render(request, "Cat_Leisure.html", ctx)
+
+def cat_furniture(request): 
+    products = Product.objects.all()
+    ctx = {'products': products, 'active': 'furniture'}
+    return render(request, "Cat_Furniture.html", ctx)
+
+def cat_beauty(request): 
+    products = Product.objects.all()
+    ctx = {'products': products, 'active': 'beauty'}
+    return render(request, "Cat_Beauty.html", ctx)
+
+def cat_childprod(request): 
+    products = Product.objects.all()
+    ctx = {'products': products, 'active': 'childprod'}
+    return render(request, "Cat_Childprod.html", ctx)
+
+def cat_pharmacy(request): 
+    products = Product.objects.all()
+    ctx = {'products': products, 'active': 'pharmacy'}
+    return render(request, "Cat_Pharmacy.html", ctx)
+
+def cat_autoprod(request): 
+    products = Product.objects.all()
+    ctx = {'products': products, 'active': 'autoprod'}
+    return render(request, "Cat_Autoprod.html", ctx)
+
+def cat_gifts(request): 
+    products = Product.objects.all()
+    ctx = {'products': products, 'active': 'gifts'}
+    return render(request, "Cat_Gifts.html", ctx)
+
+def cat_accessories(request): 
+    products = Product.objects.all()
+    ctx = {'products': products, 'active': 'accessories'}
+    return render(request, "Cat_Accessories.html", ctx)
+
+def cat_jewelry(request): 
+    products = Product.objects.all()
+    ctx = {'products': products, 'active': 'jewelry'}
+    return render(request, "Cat_Jewelry.html", ctx)
+
+def cat_petprod(request): 
+    products = Product.objects.all()
+    ctx = {'products': products, 'active': 'petprod'}
+    return render(request, "Cat_Petprod.html", ctx)
+
+def cat_stationery(request): 
+    products = Product.objects.all()
+    ctx = {'products': products, 'active': 'stationery'}
+    return render(request, "Cat_Stationery.html", ctx)
+
+def cat_shoes(request): 
+    products = Product.objects.all()
+    ctx = {'products': products, 'active': 'shoes'}
+    return render(request, "Cat_Shoes.html", ctx)
+
+
+
 
 
 class CustomUserViewSet(viewsets.ModelViewSet):
