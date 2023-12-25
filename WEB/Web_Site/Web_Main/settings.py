@@ -132,8 +132,7 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
-STATIC_ROOT = r'C:\\Users\\Home\\OneDrive\\Desktop\\Мое\\VSC 1\\.vscode\\WEB\\Web_Site\\Web_App\\static\\Web_App'    
+   
 STATIC_ROOT = r'C:\\Users\\Home\\OneDrive\\Desktop\\Мое\\VSC 1\\.vscode\\WEB\\Web_Site\\Web_App\\static\\Web_App'    
 # Change first part of this path on Your path to the /WEB folder, 
 

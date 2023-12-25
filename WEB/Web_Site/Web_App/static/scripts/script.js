@@ -142,9 +142,3 @@ closeBtn.onclick = () => {
 }
 
 });
-
-
-
-
-
-

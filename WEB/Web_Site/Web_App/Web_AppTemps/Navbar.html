@@ -341,7 +341,7 @@ role="banner" class="nav-bar w-nav">
     <form method="post" action="{% url 'signup' %}"> 
         {% csrf_token %} 
         {{ registration_form.as_p }}
-        {% for field in form %}
+        {% for field in form %}git
         <div class="fieldWrapper">
             {{ field.label_tag }} {{ field }}
             {% if field.errors %}
