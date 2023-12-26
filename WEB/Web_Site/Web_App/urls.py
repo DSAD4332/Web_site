@@ -5,7 +5,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import path, include, re_path
 from rest_framework.routers import DefaultRouter
 from . import views
-from .views import CategoryViewSet, SubcategoryViewSet, ProductViewSet, CompanyViewSet, OrderViewSet, CustomUserViewSet, ReviewViewSet, CartViewSet
+from .views import CategoryViewSet, SubcategoryViewSet, ProductViewSet, CompanyViewSet, OrderViewSet, CustomUserViewSet, ReviewViewSet, CartViewSet, add_product
 
 # Создание маршрутизатора и регистрация наших ViewSets
 router = DefaultRouter()
@@ -49,9 +49,9 @@ urlpatterns = [
     re_path(r'^category/stationery/$', views.cat_stationery, name="Cat_Stationery"),
     re_path(r'^category/shoes/$', views.cat_shoes, name="Cat_Shoes"),
     re_path(r'^products/$', views.products, name="products"),
-    path('product/', views.add_product, name='product'),
+    path('products/', views.add_product, name='products'),
     path('', include(router.urls)), 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += staticfiles_urlpatterns()

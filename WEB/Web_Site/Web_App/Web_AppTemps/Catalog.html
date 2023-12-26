@@ -83,8 +83,7 @@
                 <div class="full-width w-dyn-list">
                     <div role="list" class="products w-dyn-items">
                         {% for product in products %}
-                        <button onclick="cardSelector('{{ product.id }}')">
-                        <div role="listitem" class="product-card-wrapper w-dyn-item" id="card{{ product.id }}">
+                        <div role="listitem" class="product-card-wrapper w-dyn-item" id="card{{ product.id }}" onclick="cardSelector('{{ product.id }}')">
                             <a href="#" class="product-card w-inline-block">
                               <div class="product-card-image-wrapper">
                                 <img src="{{ product.image }}" alt="{{ product.name }}">
@@ -93,7 +92,6 @@
                               <div class="product-card-price">${{ product.price }} USD</div>
                             </a>
                           </div>
-                        </button>
                         {% endfor %}
                     </div>
                 </div>
@@ -106,10 +104,10 @@
                         </div>
                         <h1 id="prod{{product.id}}">{{ product.name }}</h1>
                         <p class="text-grey">{{ product.description }}</p>
-                        <div class="product-price">$&nbsp;{{ product.price }}&nbsp;USD</div>
+                        <div class="product-price">$&nbsp;<p id="price{{product.id}}">{{ product.price }}</p>&nbsp;USD</div>
                         <div class="full-width">
-                            <form><input type="number">
-                                <button href="#" type="button" class="btn" onclick="addProduct('{{ product.id }}')">Add to cart</button>
+                            <form><input type="number" id="quan{{product.id}}">
+                                <button href="#" type="button" class="button" onclick="addProduct('{{ product.id }}')">Add to cart</button>
                             </form>
                         </div>
                     </div>
@@ -173,7 +171,7 @@
                         class="instagram-link w-inline-block"><img
                             src="https://assets-global.website-files.com/65814db1206eb252fe3c771d/65814db1206eb252fe3c7794_instagram-06.jpg"
                             alt="" class="full-width"></a></div><a href="https://instagram.com" target="_blank"
-                    class="btn w-button">See More Photos</a>
+                    class="button w-button">See More Photos</a>
             </div>
         </div>
         <div class="section color no-padding-vertical">
@@ -265,55 +263,48 @@
     
     let productCard;
     let productView;
-    let closeBtn = document.querySelector('#cart-close-btn');
+    let product;
+    let productCloseBtns = document.querySelectorAll('#product-close-btn');
     let popupShadow = document.querySelector('.shadow');
-    
-    function cardSelector(cid) {
-        console.log('Функция cardSelector выполнена для карты', cid);
-        productCard = document.getElementById('card' + cid);
-        productCard.onclick = () => {
-            openView(cid);
-            popupShadow.style.opacity = "1";
-            popupShadow.style.zIndex = "98";
-        };
-    }
-    
+
+    var pcart = document.querySelector('#pcart');
+    var ptotal = document.querySelector('#ptotal');
+
     function openView(vid) {
     productView = document.getElementById('view' + vid);
     productView.classList.add('active-lss');
-    }
+    };
+
+    function cardSelector(cid) {
+    console.log('Функция cardSelector выполнена для карты', cid);
+    var productCardid = document.getElementById('card' + cid);
+
+    productCardid.onclick = () => {
+        openView(cid);
+        popupShadow.style.opacity = "1";
+        popupShadow.style.zIndex = "98";
+    };
     
-    var hours = 0;
-    var now = new Date().getTime(); // Corrected: Use new Date() to create a Date object
-    var stepTime = localStorage.getItem('stepTime');
+    };
     
-    if (stepTime == null) { // Corrected: Use null instead of NULL
-    localStorage.setItem('stepTime', now);
-    } else {
-    if (now - stepTime > hours * 60 * 60 * 1000) {
-    localStorage.clear();
-    localStorage.setItem('stepTime', now);
-    }
-    }  
-    var pcart = document.querySelector('#pcart');
-    var ptotal = document.querySelector('#ptotal');
-    var wrappercart = document.querySelector('.cart-wrapper');
-    
-    cart.onclick = () => {
-    wrappercart.classList.add('active-lss');
-    popupShadow.style.opacity = "1";
-    popupShadow.style.zIndex = "98";
-    }
-    
-    closeBtn.onclick = () => {
-    wrappercart.classList.remove('active-lss');
-    popupShadow.style.opacity = "0";
-    popupShadow.style.zIndex = "-1001";
-    }
-    
+    productCloseBtns.forEach(btn => {
+        btn.onclick = () => {
+            productView.classList.remove('active-lss');
+            popupShadow.style.opacity = "0";
+            popupShadow.style.zIndex = "-1001";
+        };
+    });
+
     function addProduct(pid) {
-    pcart.innerHTML += '<li>' + pid + '</li>';
-    }
+        var prodId = '#prod' + pid;
+        var Productname = document.querySelector(prodId).innerHTML;
+        var priceId = '#price' + pid;
+        var Productprice = document.querySelector(priceId).innerHTML;
+        var quanId = '#quan' + pid;
+        var Productquan = document.querySelector(quanId).value;
+        pcart.innerHTML += '<li>' + Productname + ' ' + Productprice + ' ' + Productquan + '</li>';
+
+    };
     </script>
     
 

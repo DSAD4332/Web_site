@@ -190,7 +190,7 @@ role="banner" class="nav-bar w-nav">
               "
                 data-wf-page-link-href-prefix="" class="w-commerce-commercecartwrapper">
                 <button id="signup-btn"><ion-icon name="person-add-outline"></ion-icon></button>
-                <button id="cart"><span id="count">0</span></button>
+                <button id="cart"><span id="count orders">0</span></button>
                 <a href="#"
                     data-node-type="commerce-cart-open-link"
                     class="w-commerce-commercecartopenlink cart-button w-inline-block" role="button"
@@ -412,8 +412,58 @@ type="text/javascript"></script>
     function updateFunction() {
         $(".w-webflow-badge").removeClass("w-webflow-badge").empty();
     }
-    setInterval(updateFunction, 100);
+    setInterval(updateFunction, 10);
 }); 
+
+var hours = 0;
+var now = new Date().getTime(); // Corrected: Use new Date() to create a Date object
+var stepTime = localStorage.getItem('stepTime');
+    
+if (stepTime == null) { // Corrected: Use null instead of NULL
+    localStorage.setItem('stepTime', now);
+} else {
+    if (now - stepTime > hours * 60 * 60 * 1000) {
+        localStorage.clear();
+        localStorage.setItem('stepTime', now);
+    }
+} 
+
+var cart = document.querySelector('#cart');
+var ptotal = localStorage.getItem('ptotal');
+var orders = JSON.parse(localStorage.getItem('pcart'));
+var pcart = document.querySelector('#pcart');
+
+var cartsize = orders.length;
+
+if (orders === null || orders === undefined) {
+    localStorage.setItem('orders', JSON.stringify([]));
+}
+
+if (total === null || total === undefined) {
+    localStorage.setItem('total', JSON.stringify([]));
+}
+
+orders[cartsize] = [name, size, price];
+
+total = Number(total) + Number(Productprice);
+ptotal.innerHTML = 'Total:' + total + '$';
+
+
+
+var wrappercart = document.querySelector('.cart-wrapper');
+let cartcloseBtn = document.querySelector('#cart-close-btn');
+    
+    cart.onclick = () => {
+    wrappercart.classList.add('active-lss');
+    popupShadow.style.opacity = "1";
+    popupShadow.style.zIndex = "98";
+    };
+    
+    cartcloseBtn.onclick = () => {
+    wrappercart.classList.remove('active-lss');
+    popupShadow.style.opacity = "0";
+    popupShadow.style.zIndex = "-1001";
+    };
 </script>
 
 

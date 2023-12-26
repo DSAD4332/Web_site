@@ -11,6 +11,9 @@ from .permissions import IsAdminUser, IsCustomerUser, IsCourierUser, IsCompanyUs
 from .forms import CustomUserCreationForm, CustomUserLoginForm, ProductForm
 from django.http import JsonResponse
 from django.template.loader import render_to_string
+import logging
+
+logger = logging.getLogger(__name__)
 
 def home(request): 
     return render(request, "Home.html")
@@ -367,9 +370,20 @@ def add_product(request):
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
-            # обработка и сохранение данных формы
-            return redirect('Product')
+            # Логируем данные формы
+            logger.info("Form data: %s", form.cleaned_data)
+            try:
+                product = form.save()
+                # Логируем успех
+                logger.info("Product added: %s", product)
+                return redirect('Products')
+            except Exception as e:
+                # Логируем исключение, если что-то пошло не так
+                logger.error("Error adding product: %s", e)
+        else:
+            # Логируем ошибки формы
+            logger.error("Form is not valid. Errors: %s", form.errors)
     else:
         form = ProductForm()
 
-    return render(request, 'Product.html', {'product_form': form})
+    return render(request, 'Products.html', {'product_form': form})

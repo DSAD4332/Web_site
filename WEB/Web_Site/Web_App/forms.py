@@ -27,7 +27,7 @@ class CustomUserLoginForm(AuthenticationForm):
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ['name', 'description', 'price', 'subcategory', 'image']
+        fields = ['name', 'description', 'stock_quantity', 'price', 'subcategory', 'image']
         widgets = {
             'image': forms.FileInput(attrs={'class': 'custom-file-input'}),
             }

@@ -3326,7 +3326,7 @@ html {
     padding-right: 15px;
   }
   
-  .btn {
+  .button {
     height: 48px;
     background-color: var(--color-1);
     color: #fff;
@@ -4173,6 +4173,17 @@ html {
   .product-price {
     color: var(--color-1);
     margin-bottom: 32px;
+    display: flex;
+    font-family: Varela Round, sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 32px;
+  }
+
+  .product-price p{
+    color: var(--dark);
+    margin-bottom: 32px;
+    display: flex;
     font-family: Varela Round, sans-serif;
     font-size: 24px;
     font-weight: 400;
@@ -5917,8 +5928,8 @@ html {
   }
 
   .cart-wrapper h4{
-    position: relative;
-    top: 250px;
+    position: absolute;
+    top: 450px;
     width: 120px;
     height: 25px;
   }
