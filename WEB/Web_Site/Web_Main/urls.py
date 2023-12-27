@@ -23,10 +23,15 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('catalog/', views.catalog, name='catalog'),
     path('signup/', views.signup, name='signup'),
+    path('products/', views.add_product, name='products'),
     path('login/', views.custom_login, name='login'),
     path('products/', views.add_product, name='products'),
+    path('ajax/get_subcategories/', views.get_subcategories, name='get_subcategories'),
+    path('get-subcategories/<int:category_id>/', views.get_subcategories, name='get_subcategories'),
     path('', views.home, name='home'),
+    path('catalog/products/', views.product_list, name='product_list'),
     path('', include(('Web_App.urls', 'Web_App'))),
 ]
 if settings.DEBUG:

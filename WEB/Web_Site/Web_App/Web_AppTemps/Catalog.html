@@ -21,58 +21,16 @@
                     <div class="shop-categories-wrapper">
                         <div class="list">
                             <div role="list" class="shop-categories w-dyn-items1">
-                        <div role="listitem" class="item"><a href="/category/devices"
-                            class="shop-category-link ">Gadget and Devices</a></div>
-                        <div role="listitem" class="item"><a href="/category/appliances"
-                            class="shop-category-link">Home Appliances</a>
-                        </div>
-                        <div role="listitem" class="item"><a href="/category/TAV"
-                            class="shop-category-link">TV, audio, video</a></div>
-                        <div role="listitem" class="item"><a href="/category/computers"
-                            class="shop-category-link">Computers</a>
-                        </div>
-                        <div role="listitem" class="item"><a href="/category/household"
-                            class="shop-category-link ">Household Goods</a></div>
-                        <div role="listitem" class="item"><a href="/category/sports"
-                            class="shop-category-link">Sports, Tourism</a>
-                        </div>
-                        <div role="listitem" class="item"><a href="/category/construction"
-                            class="shop-category-link ">Construction and Renovation</a></div>
-                        <div role="listitem" class="item"><a href="/category/clothes"
-                            class="shop-category-link">Clothes</a>
-                        </div>
-                        <div role="listitem" class="item"><a href="/category/leisure"
-                            class="shop-category-link ">Leisure and Books</a></div>
-                        <div role="listitem" class="item"><a href="/category/furniture"
-                            class="shop-category-link">Furniture</a>
-                        </div>
+                            {% for category in categories %}
+                        <div role="listitem" class="item" id="NaMe{{category.name}}"><a href="#"
+                            class="shop-category-link">{{category.name}}</a></div>
+                            {% endfor %}
                         </div>
                             <div role="list" class="shop-categories w-dyn-items2">
-                        <div role="listitem" class="item"><a href="/category/beauty"
-                            class="shop-category-link ">Beauty and Health</a></div>
-                        <div role="listitem" class="item"><a href="/category/childprod"
-                            class="shop-category-link">Products for children</a>
-                        </div>
-                        <div role="listitem" class="item"><a href="/category/pharmacy"
-                            class="shop-category-link ">Pharmacy</a></div>
-                        <div role="listitem" class="item"><a href="/category/autoprod"
-                            class="shop-category-link">Automotive Products</a>
-                        </div>
-                        <div role="listitem" class="item"><a href="/category/gifts"
-                            class="shop-category-link ">Gifts, Goods for Holidays</a></div>
-                        <div role="listitem" class="item"><a href="/category/accessories"
-                            class="shop-category-link">Accessories</a>
-                        </div>
-                        <div role="listitem" class="item"><a href="/category/jewelry"
-                            class="shop-category-link ">Jewelry</a></div>
-                        <div role="listitem" class="item"><a href="/category/petprod"
-                            class="shop-category-link">Products for Pets</a>
-                        </div>
-                        <div role="listitem" class="item"><a href="/category/stationery"
-                            class="shop-category-link ">Stationery</a></div>
-                        <div role="listitem" class="item"><a href="/category/shoes"
-                            class="shop-category-link">Shoes</a>
-                        </div>
+                            {% for subcategory in sub_categories %}
+                        <div role="listitem" class="item" id="{{active}}"><a href="#"
+                            class="shop-category-link ">{{subcategory.name}}</a></div>
+                            {% endfor %}
                         </div>
                         </div>
                     </div>
@@ -233,6 +191,34 @@
 
     {% block script %}
     <script>
+    document.getElementById('id_category').addEventListener('change', function() {
+            var categoryId = this.value;
+            if (categoryId) {
+                fetch(`/ajax/get_subcategories/?category_id=${categoryId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        var subcategoryContainer = document.getElementById('subcategory-container');
+                        subcategoryContainer.innerHTML = data.map(subcategory =>
+                            <div>${subcategory.name}</div>
+                        ).join('');
+                    });
+            } else {
+                document.getElementById('subcategory-container').innerHTML = '';
+            }
+        });
+        
+        function loadSubcategories(categoryId) {
+            fetch(`/api/subcategories/?category_id=${categoryId}`)
+                .then(response => response.json())
+                .then(data => {
+                    const subcategoryContainer = document.getElementById('subcategory-container');
+                    subcategoryContainer.innerHTML = '';
+                    data.forEach(sub => {
+                        subcategoryContainer.innerHTML += <p>${sub.name}</p>;
+                    });
+                });
+        }
+
     document.addEventListener('DOMContentLoaded', function() {
         const carousel1 = document.querySelector('.w-dyn-items1');
         const carousel2 = document.querySelector('.w-dyn-items2');
@@ -259,7 +245,6 @@
             carousel2.style.setProperty('--position', currentPosition);
         });
     });
-
     
     let productCard;
     let productView;

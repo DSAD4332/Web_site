@@ -6003,3 +6003,31 @@ html {
     -ms-transform: scale(1);
     transform: scale(1);
 }
+
+.active-lsss {
+  opacity: 1;
+  visibility: visible;
+  height: ;
+  pointer-events: auto;
+  z-index: 99;
+  -webkit-transform: translateY(0);
+  -ms-transform: translateY(0);
+  transform: translateY(0);
+}
+
+.cart-link {
+  color: #fff;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  background-color: var(--white);
+  border-width: 0;
+  border-radius: 0;
+  align-items: center;
+  margin: 0px 35px 0px 0px;
+  padding: 9px 15px;
+  text-decoration: none;
+  display: flex;
+}
+

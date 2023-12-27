@@ -8,7 +8,7 @@ from rest_framework.decorators import action
 from .models import CustomUser, Product, Order, Company, OrderItem, Category, Subcategory, Product, Review, Cart
 from .serializers import CustomUserSerializer, ProductSerializer, OrderSerializer, CompanySerializer, OrderItemSerializer, CategorySerializer, SubcategorySerializer, ProductSerializer, ReviewSerializer, CartSerializer
 from .permissions import IsAdminUser, IsCustomerUser, IsCourierUser, IsCompanyUser
-from .forms import CustomUserCreationForm, CustomUserLoginForm, ProductForm
+from .forms import CustomUserCreationForm, CustomUserLoginForm, ProductForm, CategoryForm
 from django.http import JsonResponse
 from django.template.loader import render_to_string
 import logging
@@ -35,109 +35,10 @@ def products(request):
 
 def catalog(request): 
     products = Product.objects.all()
-    ctx = {'products': products, 'active': 'all'}
-    return render(request, "Catalog.html", ctx) 
-
-def cat_devices(request): 
-    products = Product.objects.all()
-    ctx = {'products': products, 'active': 'devices'}
-    return render(request, "Cat_Gadget_Devices.html", ctx)
-
-def cat_appliances(request): 
-    products = Product.objects.all()
-    ctx = {'products': products, 'active': 'appliances'}
-    return render(request, "Cat_Appliances.html", ctx)
-
-def cat_TAV(request): 
-    products = Product.objects.all()
-    ctx = {'products': products, 'active': 'TAV'}
-    return render(request, "Cat_TAV.html", ctx)
-
-def cat_computers(request): 
-    products = Product.objects.all()
-    ctx = {'products': products, 'active': 'computers'}
-    return render(request, "Cat_Computers.html", ctx)
-
-def cat_household(request): 
-    products = Product.objects.all()
-    ctx = {'products': products, 'active': 'household'}
-    return render(request, "Cat_Household.html", ctx)
-
-def cat_sports(request): 
-    products = Product.objects.all()
-    ctx = {'products': products, 'active': 'sports'}
-    return render(request, "Cat_Sports.html", ctx)
-
-def cat_construction(request): 
-    products = Product.objects.all()
-    ctx = {'products': products, 'active': 'construction'}
-    return render(request, "Cat_Construction.html", ctx)
-
-def cat_clothes(request): 
-    products = Product.objects.all()
-    ctx = {'products': products, 'active': 'clothes'}
-    return render(request, "Cat_Clothes.html", ctx)
-
-def cat_leisure(request): 
-    products = Product.objects.all()
-    ctx = {'products': products, 'active': 'leisure'}
-    return render(request, "Cat_Leisure.html", ctx)
-
-def cat_furniture(request): 
-    products = Product.objects.all()
-    ctx = {'products': products, 'active': 'furniture'}
-    return render(request, "Cat_Furniture.html", ctx)
-
-def cat_beauty(request): 
-    products = Product.objects.all()
-    ctx = {'products': products, 'active': 'beauty'}
-    return render(request, "Cat_Beauty.html", ctx)
-
-def cat_childprod(request): 
-    products = Product.objects.all()
-    ctx = {'products': products, 'active': 'childprod'}
-    return render(request, "Cat_Childprod.html", ctx)
-
-def cat_pharmacy(request): 
-    products = Product.objects.all()
-    ctx = {'products': products, 'active': 'pharmacy'}
-    return render(request, "Cat_Pharmacy.html", ctx)
-
-def cat_autoprod(request): 
-    products = Product.objects.all()
-    ctx = {'products': products, 'active': 'autoprod'}
-    return render(request, "Cat_Autoprod.html", ctx)
-
-def cat_gifts(request): 
-    products = Product.objects.all()
-    ctx = {'products': products, 'active': 'gifts'}
-    return render(request, "Cat_Gifts.html", ctx)
-
-def cat_accessories(request): 
-    products = Product.objects.all()
-    ctx = {'products': products, 'active': 'accessories'}
-    return render(request, "Cat_Accessories.html", ctx)
-
-def cat_jewelry(request): 
-    products = Product.objects.all()
-    ctx = {'products': products, 'active': 'jewelry'}
-    return render(request, "Cat_Jewelry.html", ctx)
-
-def cat_petprod(request): 
-    products = Product.objects.all()
-    ctx = {'products': products, 'active': 'petprod'}
-    return render(request, "Cat_Petprod.html", ctx)
-
-def cat_stationery(request): 
-    products = Product.objects.all()
-    ctx = {'products': products, 'active': 'stationery'}
-    return render(request, "Cat_Stationery.html", ctx)
-
-def cat_shoes(request): 
-    products = Product.objects.all()
-    ctx = {'products': products, 'active': 'shoes'}
-    return render(request, "Cat_Shoes.html", ctx)
-
+    sub_categories = Subcategory.objects.all()
+    categories = Category.objects.all()
+    ctx = {'products': products, 'active': 'all', 'sub_categories': sub_categories, 'categories': categories}
+    return render(request, "Catalog.html", ctx)
 
 
 
@@ -316,18 +217,17 @@ class CartViewSet(viewsets.ModelViewSet):
 def list_orders(request):
     # Используем select_related для ForeignKey и prefetch_related для ManyToManyField
     orders = Order.objects.select_related('user').prefetch_related('products')
-    return render(request, '/Users/tair/Documents/Колледж/Python/VS/Trading_platform/Web_site/WEB/Web_Site/Web_App/Web_AppTemps/orders/list.html', {'orders': orders})
+    return render(request, 'WEB/Web_Site/Web_App/Web_AppTemps/orders/list.html', {'orders': orders})
 
 def list_products(request):
     # Используем prefetch_related для доступа к категориям через подкатегории
     products = Product.objects.prefetch_related('subcategory__category')
-    return render(request, '/Users/tair/Documents/Колледж/Python/VS/Trading_platform/Web_site/WEB/Web_Site/Web_App/Web_AppTemps/products/list.html', {'products': products})
-    return render(request, '/Users/tair/Documents/Колледж/Python/VS/Trading_platform/Web_site/WEB/Web_Site/Web_App/Web_AppTemps/products/list.html', {'products': products})
+    return render(request, 'WEB/Web_Site/Web_App/Web_AppTemps/products/list.html', {'products': products})
 
 def list_companies(request):
     companies = Company.objects.select_related('category')
-    return render(request, '/Users/tair/Documents/Колледж/Python/VS/Trading_platform/Web_site/WEB/Web_Site/Web_App/Web_AppTemps/companies/list.html', {'companies': companies})
-    return render(request, '/Users/tair/Documents/Колледж/Python/VS/Trading_platform/Web_site/WEB/Web_Site/Web_App/Web_AppTemps/companies/list.html', {'companies': companies})
+    return render(request, 'WEB/Web_Site/Web_App/Web_AppTemps/companies/list.html', {'companies': companies})
+
 
 def signup(request):
     if request.method == 'POST':
@@ -376,7 +276,7 @@ def add_product(request):
                 product = form.save()
                 # Логируем успех
                 logger.info("Product added: %s", product)
-                return redirect('Products')
+                return redirect('list_products')
             except Exception as e:
                 # Логируем исключение, если что-то пошло не так
                 logger.error("Error adding product: %s", e)
@@ -387,3 +287,30 @@ def add_product(request):
         form = ProductForm()
 
     return render(request, 'Products.html', {'product_form': form})
+
+def catalog(request):
+    categories = Category.objects.all()
+    products = Product.objects.all()
+    return render(request, 'Catalog.html', {'categories': categories, 'products': products})
+
+def get_subcategories(request, category_id):
+    subcategories = Subcategory.objects.filter(category_id=category_id)
+    data = [{"id": sub.id, "name": sub.name} for sub in subcategories]
+    return JsonResponse(data, safe=False)
+
+def product_list(request):
+    form = CategoryForm(request.GET)
+    subcategories = None
+    products = None
+
+    if form.is_valid():
+        category = form.cleaned_data['category']
+        if category:
+            subcategories = Subcategory.objects.filter(category=category)
+            products = Product.objects.filter(subcategory__in=subcategories)
+
+    return render(request, 'Catalog.html', {
+        'category_form': form,
+        'subcategories': subcategories,
+        'products': products
+    })

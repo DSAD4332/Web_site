@@ -1,6 +1,6 @@
 # forms.py
 from django import forms
-from .models import CustomUser, Product, Subcategory
+from .models import CustomUser, Product, Subcategory, Category
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 class CustomUserCreationForm(UserCreationForm):
@@ -32,3 +32,14 @@ class ProductForm(forms.ModelForm):
             'image': forms.FileInput(attrs={'class': 'custom-file-input'}),
             }
     subcategory = forms.ModelChoiceField(queryset=Subcategory.objects.all(), empty_label="Выберите подкатегорию")
+
+class CategoryForm(forms.Form):
+    category = forms.ModelChoiceField(
+        queryset=Category.objects.all(),
+        label="Категория",
+        required=False,
+        empty_label="Выберите категорию"
+    )
+
+def catogory_form(request):
+    return {'catogory_form': CategoryForm()}

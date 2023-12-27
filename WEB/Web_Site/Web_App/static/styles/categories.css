@@ -158,3 +158,5 @@ div.list {
   input:nth-of-type(10):checked ~ div#carousel {
     --position: 10;
   }
+
+  
