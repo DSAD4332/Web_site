@@ -2,60 +2,56 @@
 {% block content %}
 
 <html>
-    <div class="page-wrapper">
-        <div class="section no-padding-vertical">
-            <div class="wrapper side-paddings">
-                <div class="breadcrumbs"><a href="/" class="link-grey">Home</a><img
-                        src="https://assets-global.website-files.com/65814db1206eb252fe3c771d/65814db1206eb252fe3c77ac_arrow-right-mini-icon.svg"
-                        alt="" class="breadcrumbs-arrow">
-                    <div>Catalog</div>
-                </div>
+<div class="page-wrapper">
+    <div class="section no-padding-vertical">
+        <div class="wrapper side-paddings">
+            <div class="breadcrumbs"><a href="/" class="link-grey">Home</a><img
+                    src="https://assets-global.website-files.com/65814db1206eb252fe3c771d/65814db1206eb252fe3c77ac_arrow-right-mini-icon.svg"
+                    alt="" class="breadcrumbs-arrow">
+                <div>Catalog</div>
             </div>
         </div>
-        <div class="section">
-            <div class="wrapper">
-                <div class="shop-header">
-                    <h3 class="no-margin w-hidden-small w-hidden-tiny">All products</h3>
-                    <a href="/catalog" class="shop-category-link {% if active == 'all' %} current {% endif %}">All Products</a>
-                    <div class="shop-categories-wrapper">
-                        <!-- <div class="list">
-                            <div role="list" class="shop-categories w-dyn-items1">
-                            {% for category in categories %}
-                        <div class="item" id="NaMe{{category.name}}"><a href="#"
-                            class="shop-category-link" onclick="loadSubcategories('{{category.name}}')">{{category.name}}</a></div>
-                            {% endfor %}
-                        </div>
-                            <div role="list" class="shop-categories w-dyn-items2">
-                            {% for subcategory in sub_categories %}
-                        <div class="item" id="NaMe{{subcategory.name}}"><a href="#"
-                            class="shop-category-link">{{subcategory.name}}</a></div>
-                            {% endfor %}
-                        </div>
-                        </div>
-                    </div> -->
+    </div>
+    <div class="section">
+        <div class="wrapper">
+            <div class="shop-header">
+                <h3 class="no-margin w-hidden-small w-hidden-tiny">All products</h3>
+                <a href="/catalog" class="shop-category-link {% if active == 'all' %} current {% endif %}">All
+                    Products</a>
+                <div class="shop-categories-wrapper">
                     <div class="list" id="id_category">
                         <div role="list" class="shop-categories w-dyn-items1">
-                        {% for category in categories %}
-                        <div class="item" id="{{category.id}}"><a href="#"
-                            class="shop-category-link" onclick="loadSubcategories('{{category.id}}')">{{category.name}}</a></div>
-                        {% endfor %}
+                            {% for category in categories %}
+                            <div class="item" id="{{category.id}}"><a href="#" class="shop-category-link"
+                                    onclick="loadSubcategories('{{category.id}}')">{{category.name}}</a></div>
+                            {% endfor %}
+                        </div>
+                        <div class="shop-categories w-dyn-items2" id="subcategory-container">
+                            <!-- Сюда будут загружены подкатегории -->
+                        </div>
                     </div>
-                    <div class="shop-categories w-dyn-items2" id="subcategory-container">
-                        <!-- Сюда будут загружены подкатегории -->
+                    <div class="shop-header-line">
+                        <div class="shop-header-color green w-hidden-small w-hidden-tiny"></div>
                     </div>
-                    </div>
-                <div class="shop-header-line">
-                    <div class="shop-header-color green w-hidden-small w-hidden-tiny"></div>
-                </div>
 
                 </div>
                 <div class="full-width w-dyn-list">
                     <div role="list" class="products w-dyn-items">
-                        <!-- Сюда будут загружены продукты -->
+                        {% for product in products %}
+                        <div role="listitem" class="product-card-wrapper w-dyn-item" id="card${product.id}" onclick="cardSelector('${product.id}')">
+                            <a href="#" class="product-card w-inline-block">
+                                <div class="product-card-image-wrapper">
+                                    <img src="${product.image}" alt="${product.name}">
+                                </div>
+                                <h6 class="product-card-heading" id="prod${product.id}">${product.name}</h6>
+                                <div class="product-card-price">$${product.price} USD</div>
+                            </a>
+                        </div>
+                        {% endfor %}
                     </div>
                 </div>
-                
-                    {% for product in products %}
+
+                {% for product in products %}
                 <div class="product-view" id="view{{ product.id }}">
                     <div class="product-info">
                         <div id="product-close-btn" class="ls-close-btn">
@@ -63,16 +59,18 @@
                         </div>
                         <h1 id="prod{{product.id}}">{{ product.name }}</h1>
                         <p class="text-grey">{{ product.description }}</p>
-                        <div class="product-price">$&nbsp;<p id="price{{product.id}}">{{ product.price }}</p>&nbsp;USD</div>
+                        <div class="product-price">$&nbsp;<p id="price{{product.id}}">{{ product.price }}</p>&nbsp;USD
+                        </div>
                         <div class="full-width">
                             <form><input type="number" id="quan{{product.id}}">
-                                <button href="#" type="button" class="button" onclick="addProduct('{{ product.id }}')">Add to cart</button>
+                                <button href="#" type="button" class="button"
+                                    onclick="addProduct('{{ product.id }}')">Add to cart</button>
                             </form>
                         </div>
                     </div>
                     <div class="product-image-wrapper"><img src='{{ product.image }}' alt=""></div>
                 </div>
-                    {% endfor %}
+                {% endfor %}
 
             </div>
         </div>
@@ -116,61 +114,63 @@
     {% block script %}
     <script>
 
-document.addEventListener('DOMContentLoaded', function() {
-    const carousel1 = document.querySelector('.w-dyn-items1');
-    const carousel2 = document.querySelector('.w-dyn-items2');
+        document.addEventListener('DOMContentLoaded', function () {
+            const carousel1 = document.querySelector('.w-dyn-items1');
+            const carousel2 = document.querySelector('.w-dyn-items2');
 
-    let currentPosition = 1;
+            let currentPosition = 1;
 
-    carousel1.addEventListener('wheel', (event) => {
-        event.preventDefault();
+            carousel1.addEventListener('wheel', (event) => {
+                event.preventDefault();
 
-        currentPosition += (event.deltaY > 0) ? 1 : -1;
+                currentPosition += (event.deltaY > 0) ? 1 : -1;
 
-        currentPosition = Math.min(Math.max(currentPosition, 1), 5);
+                currentPosition = Math.min(Math.max(currentPosition, 1), 5);
 
-        carousel1.style.setProperty('--position', currentPosition);
-    });
+                carousel1.style.setProperty('--position', currentPosition);
+            });
 
-    carousel2.addEventListener('wheel', (event) => {
-        event.preventDefault();
+            carousel2.addEventListener('wheel', (event) => {
+                event.preventDefault();
 
-        currentPosition += (event.deltaY > 0) ? 1 : -1;
+                currentPosition += (event.deltaY > 0) ? 1 : -1;
 
-        currentPosition = Math.min(Math.max(currentPosition, 1), 3);
+                currentPosition = Math.min(Math.max(currentPosition, 1), 3);
 
-        carousel2.style.setProperty('--position', currentPosition);
-    });
-});
-    function loadSubcategories(categoryId) {
-        const carousel2 = document.querySelector('.w-dyn-items2');
-        carousel2.style.opacity = 1;
-        carousel2.style.visibility = 'visible';
-        carousel2.style.height = 50 + 'px';
-        carousel2.style.backgroundColor = 'var(--haze)';
-        fetch(`/api/subcategories/?category_id=${categoryId}`)
-            .then(response => response.json())
-            .then(data => {
-                const subcategoryContainer = document.getElementById('subcategory-container');
-                subcategoryContainer.innerHTML = '';
-                data.forEach(sub => {
-                    if (sub.category == categoryId) {
-                    subcategoryContainer.innerHTML += `
+                carousel2.style.setProperty('--position', currentPosition);
+            });
+        });
+        function loadSubcategories(categoryId) {
+            const carousel2 = document.querySelector('.w-dyn-items2');
+            carousel2.style.opacity = 1;
+            carousel2.style.visibility = 'visible';
+            carousel2.style.height = 50 + 'px';
+            carousel2.style.backgroundColor = 'var(--haze)';
+            fetch(`/api/subcategories/?category_id=${categoryId}`)
+                .then(response => response.json())
+                .then(data => {
+                    const subcategoryContainer = document.getElementById('subcategory-container');
+                    subcategoryContainer.innerHTML = '';
+                    data.forEach(sub => {
+                        if (sub.category == categoryId) {
+                            subcategoryContainer.innerHTML += `
                         <div class="item" id="sub${sub.id}" onclick="loadProductsForSubcategory('${sub.id}')">
                         <a href="#" class="shop-category-link">${sub.name}</a></div>
                     `;
-                }});
-            });
-    };
-    function loadProductsForSubcategory(subcategoryId) {
-    // Вместо fetch для подкатегорий загружаем продукты для выбранной подкатегории
-    fetch(`/api/products/?subcategory_id=${subcategoryId}`)
-        .then(response => response.json())
-        .then(pdata => {
-            const productsContainer = document.querySelector('.w-dyn-items');
-            productsContainer.innerHTML = '';
-            pdata.forEach(product => {
-                productsContainer.innerHTML += `
+                        }
+                    });
+                });
+        };
+        function loadProductsForSubcategory(sid) {
+
+            fetch(`/api/subcategories/?category_id=${categoryId}`)
+                .then(response => response.json())
+                .then(data => {
+                    const productsContainer = document.querySelector('.w-dyn-items');
+                    productsContainer.innerHTML = '';
+                    data.forEach(sub => {
+                        if (sub.id == sid) {
+                            productsContainer.innerHTML += `
                     <div role="listitem" class="product-card-wrapper w-dyn-item" id="card${product.id}" onclick="cardSelector('${product.id}')">
                         <a href="#" class="product-card w-inline-block">
                             <div class="product-card-image-wrapper">
@@ -181,56 +181,54 @@ document.addEventListener('DOMContentLoaded', function() {
                         </a>
                     </div>
                 `;
-            });
-        })
-        .catch(error => {
-            console.error('Error loading products:', error);
+            }
+                    });
+                });
+        };
+        let productCard;
+        let productView;
+        let product;
+        let productCloseBtns = document.querySelectorAll('#product-close-btn');
+
+        var pcart = document.querySelector('#pcart');
+
+        var ptotal = document.querySelector('#ptotal');
+
+        function openView(vid) {
+            productView = document.getElementById('view' + vid);
+            productView.classList.add('active-lss');
+        };
+
+        function cardSelector(cid) {
+            console.log('Функция cardSelector выполнена для карты', cid);
+            var productCardid = document.getElementById('card' + cid);
+
+            productCardid.onclick = () => {
+                openView(cid);
+                popupShadow.style.opacity = "1";
+                popupShadow.style.zIndex = "98";
+            };
+
+        };
+
+        productCloseBtns.forEach(btn => {
+            btn.onclick = () => {
+                productView.classList.remove('active-lss');
+                popupShadow.style.opacity = "0";
+                popupShadow.style.zIndex = "-1001";
+            };
         });
-}
-let productCard;
-let productView;
-let product;
-let productCloseBtns = document.querySelectorAll('#product-close-btn');
 
-var pcart = document.querySelector('#pcart');
+        function addProduct(pid) {
+            var prodId = '#prod' + pid;
+            var Productname = document.querySelector(prodId).innerHTML;
+            var priceId = '#price' + pid;
+            var Productprice = document.querySelector(priceId).innerHTML;
+            var quanId = '#quan' + pid;
+            var Productquan = document.querySelector(quanId).value;
+            pcart.innerHTML += '<li>' + Productname + ' ' + Productprice + ' ' + Productquan + '</li>';
 
-var ptotal = document.querySelector('#ptotal');
-
-function openView(vid) {
-    productView = document.getElementById('view' + vid);
-    productView.classList.add('active-lss');
-};
-
-function cardSelector(cid) {
-console.log('Функция cardSelector выполнена для карты', cid);
-var productCardid = document.getElementById('card' + cid);
-
-productCardid.onclick = () => {
-    openView(cid);
-    popupShadow.style.opacity = "1";
-    popupShadow.style.zIndex = "98";
-};
-
-};
-
-productCloseBtns.forEach(btn => {
-    btn.onclick = () => {
-        productView.classList.remove('active-lss');
-        popupShadow.style.opacity = "0";
-        popupShadow.style.zIndex = "-1001";
-    };
-});
-
-function addProduct(pid) {
-    var prodId = '#prod' + pid;
-    var Productname = document.querySelector(prodId).innerHTML;
-    var priceId = '#price' + pid;
-    var Productprice = document.querySelector(priceId).innerHTML;
-    var quanId = '#quan' + pid;
-    var Productquan = document.querySelector(quanId).value;
-    pcart.innerHTML += '<li>' + Productname + ' ' + Productprice + ' ' + Productquan + '</li>';
-
-};
+        };
 
     </script>
-{% endblock %}
+    {% endblock %}
