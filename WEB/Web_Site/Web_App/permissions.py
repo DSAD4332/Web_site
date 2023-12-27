@@ -7,7 +7,7 @@ class IsAdminUser(permissions.BasePermission):
 
 class IsCustomerUser(permissions.BasePermission):
     def has_permission(self, request, view):
-        return request.user and request.user.role == 'customer'
+        return request.user and getattr(request.user, 'role', None) == 'customer'
 
 class IsCourierUser(permissions.BasePermission):
     def has_permission(self, request, view):

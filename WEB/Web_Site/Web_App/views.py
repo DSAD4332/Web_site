@@ -288,15 +288,15 @@ def add_product(request):
 
     return render(request, 'Products.html', {'product_form': form})
 
-def catalog(request):
-    categories = Category.objects.all()
-    products = Product.objects.all()
-    return render(request, 'Catalog.html', {'categories': categories, 'products': products})
-
 def get_subcategories(request, category_id):
     subcategories = Subcategory.objects.filter(category_id=category_id)
     data = [{"id": sub.id, "name": sub.name} for sub in subcategories]
     return JsonResponse(data, safe=False)
+
+def get_products(request, subcategory_id):
+    products = Product.objects.filter(subcategory_id=subcategory_id)
+    pdata = [{"id": product.id, "name": product.name, "image": product.image, "price": product.price} for product in products]
+    return JsonResponse(pdata, safe=False)
 
 def product_list(request):
     form = CategoryForm(request.GET)

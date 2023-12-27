@@ -2,7 +2,7 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from django.urls import path, include, re_path
+from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from . import views
 from .views import CategoryViewSet, SubcategoryViewSet, ProductViewSet, CompanyViewSet, OrderViewSet, CustomUserViewSet, ReviewViewSet, CartViewSet, add_product
@@ -20,26 +20,22 @@ router.register(r'carts', CartViewSet)
 
 # Объединение URL-конфигураций
 urlpatterns = [
-    re_path(r'^$', views.home, name='home'),
-    re_path(r'^home$', views.home, name='home'),
-    re_path(r'^catalog/$', views.catalog, name="catalog"),
-    re_path(r'^cooperation/$', views.cooperation, name="cooperation"),
-    re_path(r'^contacts/$', views.contacts, name="contacts"),
-  # re_path(r'^register/$', views.registration_view, name='register'),
-    re_path(r'^checkout/$', views.checkout, name="checkout"),
-    re_path(r'^order_confirmation/$', views.order_confirmation, name="order_confirmation"),
-    re_path(r'^products/$', views.products, name="products"),
-    path('', include(router.urls)),
+    path('catalog', views.catalog, name="catalog"),
+    path('cooperation', views.cooperation, name="cooperation"),
+    path('contacts', views.contacts, name="contacts"),
+    path('checkout', views.checkout, name="checkout"),
+    path('order_confirmation', views.order_confirmation, name="order_confirmation"),
+    path('products', views.products, name="products"),
     path('signup/', views.signup, name='signup'),
-   # path('catalog/', views.catalog, name='catalog'),
     path('login/', views.custom_login, name='login'),
     path('producs/', views.add_product, name='products'),
-    path('ajax/get_subcategories/', views.get_subcategories, name='get_subcategories'),
     path('get-subcategories/<int:category_id>/', views.get_subcategories, name='get_subcategories'),
-    path('', views.home, name='home'),
+    path('get-products/<int:subcategory_id>/', views.get_products, name='get_products'),
     path('catalog/products/', views.product_list, name='product_list'),
-    path('', include(router.urls)), 
+    path('', views.home, name='home'),
     path('api/', include(router.urls)),
+    path('', include(router.urls)), 
+    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

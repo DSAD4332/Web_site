@@ -18,23 +18,27 @@ div.list {
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    --items: 10;
-    --middle: 5;
-    --position: 1;
+    --items: 5;
+    --middle: 3;
+    --position: 3;
   }
   
   div.shop-categories.w-dyn-items2 {
+    opacity: 0;
+    visibility: hidden;
     position: relative;
     grid-row: 2 / 2;
     grid-column: 1 / 10;
     width: 100vw;
-    height: 50px;
+    height: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    --items: 10;
-    --middle: 5;
+    background-color: var(--grey-2);
+    transition: all 0.5s ease-in;
+    --items: 3;
+    --middle: 2;
     --position: 1;
   }
   
@@ -62,101 +66,3 @@ div.list {
    div.item:nth-of-type(5) {
     --offset: 5;
   }
-   div.item:nth-of-type(6) {
-    --offset: 6;
-  }
-   div.item:nth-of-type(7) {
-    --offset: 7;
-  }
-   div.item:nth-of-type(8) {
-    --offset: 8;
-  }
-   div.item:nth-of-type(9) {
-    --offset: 9;
-  }
-   div.item:nth-of-type(10) {
-    --offset: 10;
-  }
-
-
-  input:nth-of-type(1) {
-    grid-column: 2 / 3;
-    grid-row: 2 / 3;
-  }
-  input:nth-of-type(1):checked ~ div#carousel {
-    --position: 1;
-  }
-  
-  input:nth-of-type(2) {
-    grid-column: 3 / 4;
-    grid-row: 2 / 3;
-  }
-  input:nth-of-type(2):checked ~ div#carousel {
-    --position: 2;
-  }
-  
-  input:nth-of-type(3) {
-    grid-column: 4 /5;
-    grid-row: 2 / 3;
-  }
-  input:nth-of-type(3):checked ~ div#carousel {
-    --position: 3;
-  }
-  
-  input:nth-of-type(4) {
-    grid-column: 5 / 6;
-    grid-row: 2 / 3;
-  }
-  input:nth-of-type(4):checked ~ div#carousel {
-    --position: 4;
-  }
-  
-  input:nth-of-type(5) {
-    grid-column: 6 / 7;
-    grid-row: 2 / 3;
-  }
-  input:nth-of-type(5):checked ~ div#carousel {
-    --position: 5;
-  }
-
-  input:nth-of-type(6) {
-    grid-column: 7 / 8;
-    grid-row: 2 / 3;
-  }
-  input:nth-of-type(6):checked ~ div#carousel {
-    --position: 6;
-  }
-  
-  input:nth-of-type(7) {
-    grid-column: 8 / 9;
-    grid-row: 2 / 3;
-  }
-  input:nth-of-type(7):checked ~ div#carousel {
-    --position: 7;
-  }
-  
-  input:nth-of-type(8) {
-    grid-column: 9 /10;
-    grid-row: 2 / 3;
-  }
-  input:nth-of-type(8):checked ~ div#carousel {
-    --position: 8;
-  }
-  
-  input:nth-of-type(9) {
-    grid-column: 10 / 11;
-    grid-row: 2 / 3;
-  }
-  input:nth-of-type(9):checked ~ div#carousel {
-    --position: 9;
-  }
-  
-  input:nth-of-type(10) {
-    grid-column: 11 / 12;
-    grid-row: 2 / 3;
-  }
-  input:nth-of-type(10):checked ~ div#carousel {
-    --position: 10;
-  }
-
-  
