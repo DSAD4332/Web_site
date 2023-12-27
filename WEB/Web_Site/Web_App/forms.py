@@ -1,6 +1,6 @@
 # forms.py
 from django import forms
-from .models import CustomUser, Product, Subcategory, Category
+from .models import CustomUser, Product, Subcategory, Category, CartItem 
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 class CustomUserCreationForm(UserCreationForm):
@@ -43,3 +43,11 @@ class CategoryForm(forms.Form):
 
 def catogory_form(request):
     return {'catogory_form': CategoryForm()}
+
+class CartItemForm(forms.ModelForm):
+    class Meta:
+        model = CartItem
+        fields = ['product', 'quantity']
+
+    product = forms.ModelChoiceField(queryset=Product.objects.all(), label="Product")
+    quantity = forms.IntegerField(min_value=1, label="Quantity")

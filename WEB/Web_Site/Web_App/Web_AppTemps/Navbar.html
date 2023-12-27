@@ -130,16 +130,41 @@ role="banner" class="nav-bar w-nav">
     </div>
 
 </div>
-    <div class="cart-wrapper">
-        <div class="product-list orders">
-            <div id="cart-close-btn" class="ls-close-btn">
-                <span><ion-icon name="close-circle-outline"></ion-icon></span>
-            </div>
-            <h2>Your Cart</h2>
-            <ul id="pcart"></ul>
-            <h4 id="ptotal">Total: 0 $</h4>
+<div class="cart-wrapper">
+    <h1>Ваша Корзина</h1>
+    
+    <!-- Список товаров в корзине -->
+    <div class="cart-items">
+        <div id="cart-close-btn" class="ls-close-btn">
+            <span><ion-icon name="close-circle-outline"></ion-icon></span>
         </div>
+        {% for item in cart_items %}
+
+        <div class="cart-item">
+            <h5>{{ item.product.name }}</h5>
+            <p>Количество: {{ item.quantity }}</p>
+            <p>Цена: {{ item.product.price }}</p>
+            
+            <!-- Форма для изменения количества товара -->
+            <form method="post" action="{% url 'update_cart_item' item.id %}">
+                {% csrf_token %}
+                <input type="number" name="quantity" value="{{ item.quantity }}" min="1">
+                <button type="submit">Изменить количество</button>
+            </form>
+
+            <!-- Кнопка для удаления товара из корзины -->
+            <form method="post" action="{% url 'remove_from_cart' item.id %}">
+                {% csrf_token %}
+                <button type="submit">Удалить</button>
+            </form>
+        </div>
+        {% empty %}
+        <p>Ваша корзина пуста.</p>
+        {% endfor %}
     </div>
+</div>
+
+
 
       {% block content %} {% endblock %}
 

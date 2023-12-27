@@ -5,10 +5,10 @@ from django.contrib.auth import login, authenticate
 from rest_framework import viewsets, permissions, status
 from rest_framework.response import Response
 from rest_framework.decorators import action
-from .models import CustomUser, Product, Order, Company, OrderItem, Category, Subcategory, Product, Review, Cart
+from .models import CustomUser, Product, Order, Company, OrderItem, Category, Subcategory, Product, Review, Cart, CartItem
 from .serializers import CustomUserSerializer, ProductSerializer, OrderSerializer, CompanySerializer, OrderItemSerializer, CategorySerializer, SubcategorySerializer, ProductSerializer, ReviewSerializer, CartSerializer
 from .permissions import IsAdminUser, IsCustomerUser, IsCourierUser, IsCompanyUser
-from .forms import CustomUserCreationForm, CustomUserLoginForm, ProductForm, CategoryForm
+from .forms import CustomUserCreationForm, CustomUserLoginForm, ProductForm, CategoryForm, CartItemForm
 from django.http import JsonResponse
 from django.template.loader import render_to_string
 import logging
@@ -314,3 +314,39 @@ def product_list(request):
         'subcategories': subcategories,
         'products': products
     })
+
+def cart_view(request):
+    if request.method == 'POST':
+        form = CartItemForm(request.POST)
+        if form.is_valid():
+            # Проверяем, существует ли корзина у пользователя
+            cart, _ = Cart.objects.get_or_create(user=request.user)
+            cart_item = form.save(commit=False)
+            cart_item.cart = cart
+            cart_item.save()
+            return redirect(request.META.get('HTTP_REFERER', 'home'))  # Перенаправляем на страницу корзины
+    else:
+        form = CartItemForm()
+
+    return render(request, 'Navbar.html', {'cart_item_form': form})
+
+def add_to_cart(request):
+    if request.method == 'POST':
+        form = CartItemForm(request.POST)
+        if form.is_valid():
+            cart, _ = Cart.objects.get_or_create(user=request.user)
+            product = form.cleaned_data.get('product')
+            quantity = form.cleaned_data.get('quantity')
+
+            # Проверяем, есть ли уже такой товар в корзине
+            item, created = CartItem.objects.get_or_create(cart=cart, product=product, defaults={'quantity': quantity})
+            if not created:
+                # Если товар уже есть, обновляем количество
+                item.quantity += quantity
+                item.save()
+
+            # Можете вернуть информацию о товаре или обновить общую стоимость корзины и т.д.
+            return JsonResponse({"success": True, "product_id": product.id, "quantity": quantity})
+        else:
+            return JsonResponse({"success": False, "error": form.errors})
+    return JsonResponse({"success": False, "error": "Only POST method is accepted"})

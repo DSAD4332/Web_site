@@ -1,4 +1,5 @@
-{% extends 'Navbar.html' %}{% load static %}
+{% extends 'Navbar.html' %}
+{% load static %}
 {% block content %}
 
 <html>
@@ -38,15 +39,17 @@
                 <div class="full-width w-dyn-list">
                     <div role="list" class="products w-dyn-items">
                         {% for product in products %}
-                        <div role="listitem" class="product-card-wrapper w-dyn-item" id="card${product.id}" onclick="cardSelector('${product.id}')">
+                            {% if product.subcategory_id == target %}
+                        <div role="listitem" class="product-card-wrapper w-dyn-item" id="card{{product.id}}" onclick="cardSelector('{{product.id}}')">
                             <a href="#" class="product-card w-inline-block">
                                 <div class="product-card-image-wrapper">
-                                    <img src="${product.image}" alt="${product.name}">
+                                    <img src="{{product.image}}" alt="{{product.name}}">
                                 </div>
-                                <h6 class="product-card-heading" id="prod${product.id}">${product.name}</h6>
-                                <div class="product-card-price">$${product.price} USD</div>
+                                <h6 class="product-card-heading" id="prod{{product.id}}">${{product.name}}</h6>
+                                <div class="product-card-price">${{product.price}} USD</div>
                             </a>
                         </div>
+                            {% endif %}
                         {% endfor %}
                     </div>
                 </div>
