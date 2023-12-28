@@ -27,14 +27,13 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('products/', views.add_product, name='products'),
     path('login/', views.custom_login, name='login'),
-    path('products/', views.add_product, name='products'),
     path('ajax/get_subcategories/', views.get_subcategories, name='get_subcategories'),
     path('get-subcategories/<int:category_id>/', views.get_subcategories, name='get_subcategories'),
     path('', views.home, name='home'),
-    # path('catalog/products/', views.product_list, name='product_list'),
     path('cart/', views.cart_view, name='cart_view'),
     path('cart/add/', views.add_to_cart, name='add_to_cart'),
     path('', include(('Web_App.urls', 'Web_App'))),
 ]
+
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

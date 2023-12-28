@@ -1028,31 +1028,6 @@ html {
     background-color: var(--color-1);
   }
   
-  .link {
-    color: var(--dark);
-    border-bottom: 2px solid #ddd;
-    padding-top: 2px;
-    padding-bottom: 2px;
-    font-size: 13px;
-    font-weight: 600;
-    line-height: 20px;
-    text-decoration: none;
-    transition: border-color .3s;
-    display: inline-block;
-  }
-  
-  .link:hover {
-    border-bottom-color: var(--color-1);
-  }
-  
-  .link.arrow-link {
-    background-image: url("https://assets-global.website-files.com/65814db1206eb252fe3c771d/65814db1206eb252fe3c77ac_arrow-right-mini-icon.svg");
-    background-position: 100%;
-    background-repeat: no-repeat;
-    background-size: 11px;
-    margin-top: 4px;
-    padding-right: 20px;
-  }
   
   .subscribe {
     width: 100%;
@@ -2051,8 +2026,7 @@ html {
     }
   }
   
-  .login-wrapper,
-  .signup-wrapper {
+  .login-wrapper {
       position: fixed;
       width: 400px;
       height: 440px;
@@ -2075,6 +2049,34 @@ html {
       transition: all 0.4s ease;
   }
   
+  .signup-wrapper {
+    position: fixed;
+    width: 400px;
+    height: 600px;
+    top: -1000px;
+    left: 1000px;
+    background: var(--haze);
+    border: 3px solid var(--color-1);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 100;
+    -webkit-transform: translateY(-10%);
+    -ms-transform: translateY(-10%);
+    transform: translateY(-10%);
+    -webkit-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
+
+.signup-wrapper input{
+  margin: -5px;
+  color: black;
+  text-align: center;
+}
   .formBox {
       width: 100%;
       padding: 40px;
@@ -2082,73 +2084,10 @@ html {
   
   .formBox h2 {
       font-size: 2em;
-      margin-top: 25px;
       color: black;
       text-align: center;
   }
-  
-  
-  .inputreg {
-      position:relative;
-      width: 100%;
-      height: 50px;
-      border-bottom: 2px solid black;
-      margin: 30px 0;
-  }
-  
-  .inputreg label {
-      position: absolute;
-      top: 50%;
-      left: 5px;
-      transform: translateY(-50%);
-      font-size: 15px;
-      color: black;
-      font-weight: 500;
-      pointer-events: none;
-      transition: .5s;
-  }
-  
-  .inputreg input:focus~label,
-  .inputreg input:valid~label {
-      top: -5px;
-  
-  }
-  
-  .inputreg input {
-      width: 100%;
-      height: 100%;
-      background: var(--haze);
-      border: none;
-      outline: none;
-      font-size: 1em;
-      color: #000;
-      font-weight: 600;
-      padding: 0 35px 0 5px;
-  }
-  
-  .inputreg .icon {
-      position: absolute;
-      right: 8px;
-      font-size: 1.2em;
-      color: #000;
-      line-height: 10px;
-  }
-  
-  .remember {
-      font-size: .9em;
-      color: #000;
-      font-weight: 500;
-      margin: -15px 0 15px 0;
-      display: flex;
-      justify-content: space-between;
-  }
-  
-  .remember label input{
-      width: auto;
-      accent-color: var(--color-4);
-      margin-right: 3px;
-  }
-  
+
   .cart-wrapper {
     position: fixed;
     width: 750px;
@@ -2240,7 +2179,7 @@ html {
   .active-ls {
       opacity: 1;
       visibility: visible;
-      top: 150px;
+      top: 110px;
       left: 500px;
       pointer-events: auto;
       z-index: 99;

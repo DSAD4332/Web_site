@@ -38,19 +38,21 @@
                 </div>
                 <div class="full-width w-dyn-list">
                     <div role="list" class="products w-dyn-items">
-                        {% for product in products %}
-                            {% if product.subcategory_id == target %}
-                        <div role="listitem" class="product-card-wrapper w-dyn-item" id="card{{product.id}}" onclick="cardSelector('{{product.id}}')">
-                            <a href="#" class="product-card w-inline-block">
-                                <div class="product-card-image-wrapper">
-                                    <img src="{{product.image}}" alt="{{product.name}}">
+                    {% for subcategory in sub_categories %}
+                    {% for product in products %}
+                    {% if product.subcategory_id == subcategory.id %}
+                                <div role="listitem" class="product-card-wrapper w-dyn-item" id="psub{{subcategory.id}}" onclick="cardSelector('{{product.id}}')">
+                                    <a href="#" class="product-card w-inline-block" id="card{{product.id}}">
+                                        <div class="product-card-image-wrapper">
+                                            <img src="{{product.image}}" alt="{{product.name}}">
+                                        </div>
+                                        <h6 class="product-card-heading" id="prod{{product.id}}">${{product.name}}</h6>
+                                        <div class="product-card-price">${{product.price}} USD</div>
+                                    </a>
                                 </div>
-                                <h6 class="product-card-heading" id="prod{{product.id}}">${{product.name}}</h6>
-                                <div class="product-card-price">${{product.price}} USD</div>
-                            </a>
-                        </div>
-                            {% endif %}
+                                {% endif %}
                         {% endfor %}
+                    {% endfor %}
                     </div>
                 </div>
 
@@ -164,30 +166,17 @@
                     });
                 });
         };
-        function loadProductsForSubcategory(sid) {
+    function loadProductsForSubcategory(subcategoryId) {
+        // Скрыть все продукты
+        document.querySelectorAll('.w-dyn-item').forEach(product => {
+            product.style.display = 'none';
+        });
 
-            fetch(`/api/subcategories/?category_id=${categoryId}`)
-                .then(response => response.json())
-                .then(data => {
-                    const productsContainer = document.querySelector('.w-dyn-items');
-                    productsContainer.innerHTML = '';
-                    data.forEach(sub => {
-                        if (sub.id == sid) {
-                            productsContainer.innerHTML += `
-                    <div role="listitem" class="product-card-wrapper w-dyn-item" id="card${product.id}" onclick="cardSelector('${product.id}')">
-                        <a href="#" class="product-card w-inline-block">
-                            <div class="product-card-image-wrapper">
-                                <img src="${product.image}" alt="${product.name}">
-                            </div>
-                            <h6 class="product-card-heading" id="prod${product.id}">${product.name}</h6>
-                            <div class="product-card-price">$${product.price} USD</div>
-                        </a>
-                    </div>
-                `;
-            }
-                    });
-                });
-        };
+        // Показать только продукты, соответствующие выбранной подкатегории
+        document.querySelectorAll('#psub' + subcategoryId).forEach(product => {
+            product.style.display = 'flex';
+        });
+    };
         let productCard;
         let productView;
         let product;

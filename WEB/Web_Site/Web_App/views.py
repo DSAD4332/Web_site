@@ -17,18 +17,12 @@ logger = logging.getLogger(__name__)
 
 def home(request): 
     return render(request, "Home.html")
-  
-def contacts(request): 
-    return render(request, "Contacts.html")
 
 def checkout(request): 
     return render(request, "Checkout.html")
 
 def cooperation(request): 
     return render(request, "Cooperation.html")
-
-def order_confirmation(request): 
-    return render(request, "Order_confirmation.html")
 
 def products(request): 
     return render(request, "Products.html")
@@ -276,7 +270,7 @@ def add_product(request):
                 product = form.save()
                 # Логируем успех
                 logger.info("Product added: %s", product)
-                return redirect('list_products')
+                return redirect('products')
             except Exception as e:
                 # Логируем исключение, если что-то пошло не так
                 logger.error("Error adding product: %s", e)

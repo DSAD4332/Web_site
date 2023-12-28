@@ -20,18 +20,13 @@ router.register(r'carts', CartViewSet)
 
 # Объединение URL-конфигураций
 urlpatterns = [
-    path('catalog', views.catalog, name="catalog"),
-    path('cooperation', views.cooperation, name="cooperation"),
-    path('contacts', views.contacts, name="contacts"),
-    path('checkout', views.checkout, name="checkout"),
-    path('order_confirmation', views.order_confirmation, name="order_confirmation"),
-    path('products', views.products, name="products"),
+    path('catalog/', views.catalog, name="catalog"),
+    path('cooperation/', views.cooperation, name="cooperation"),
+    path('checkout/', views.checkout, name="checkout"),
     path('signup/', views.signup, name='signup'),
     path('login/', views.custom_login, name='login'),
-    path('producs/', views.add_product, name='products'),
+    path('products/', views.add_product, name='products'),
     path('get-subcategories/<int:category_id>/', views.get_subcategories, name='get_subcategories'),
-    path('get-products/<int:subcategory_id>/', views.get_products, name='get_products'),
-    # path('catalog/products/', views.product_list, name='product_list'),
     path('cart/', views.cart_view, name='cart_view'),
     path('cart/add/', views.add_to_cart, name='add_to_cart'),
     path('', views.home, name='home'),
